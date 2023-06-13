@@ -42,6 +42,15 @@ Enter your own model in `finetune.py`
 
 Run ` accelerator config` then run ```accelerator launch finetune.py```
 
+
+#### Run inference
+Enter in your own model in `inference.py` `model_id="your model"`
+
+Enter your own input question `text="task"`
+
+Run `inference.py`
+
+
 # Share the Love! 💙
 
 Spread the message of the Finetuning-Suite, this is an foundational tool to help everyone quantize and finetune state of the art models.
