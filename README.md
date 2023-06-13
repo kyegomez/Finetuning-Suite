@@ -2,6 +2,8 @@
 
 Agora is an open source research organization devoted to advancing Humanity! Join us and contribute to this project or any of our other 30+ revolutinary projects
 
+[Join our discord to contribute on this project or receieve support](https://discord.gg/qUtxnK2NMf)
+
 ![Agora banner](agora-banner.png)
 
 # Finetuning-Suite
