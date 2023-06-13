@@ -25,3 +25,22 @@ Finetuning-Suite is a comprehensive open-source toolkit designed to fine-tune mu
 * Evaluation metrics and visualization tools
 
 * Easy integration with popular deep learning frameworks
+
+
+# Get Started
+
+## Method1
+
+Get started:
+
+```git clone https://github.com/kyegomez/Finetuning-Suite.git```
+
+Enter repository
+```cd Finetuning-Suite```
+
+Download the requirements:
+```python3 -m pip install requirements.txt```
+
+Enter your own model in `finetune.py` 
+
+Run ` accelerator config` then run ```accelerator launch finetune.py```
