@@ -1,0 +1,6 @@
+torch>=1.7
+transformers>=4.15.0
+datasets>=2.2.0
+tqdm
+beir
+mteb
