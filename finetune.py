@@ -43,6 +43,8 @@ from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 
 
 ########################## FINETUNING CONFIG
+model_id="huggingface MODEL"
+
 nf4_config = BitsAndBytesConfig(
    load_in_4bit=True,
    bnb_4bit_quant_type="nf4",
@@ -498,9 +500,9 @@ def main():
 
 
     # model = Kosmos.to(accelerator.device)
-    model = AutoModelForCausalLM.from_pretrained("YOUR MODEL", load_in_4bit=True, device_map="auto").to(accelerator.device)
+    # model = AutoModelForCausalLM.from_pretrained("YOUR MODEL", load_in_4bit=True, device_map="auto").to(accelerator.device)
 
-    # model_nf4 = AutoModelForCausalLM.from_pretrained(model_id, quantization_config=nf4_config)
+    model = AutoModelForCausalLM.from_pretrained(model_id, quantization_config=nf4_config).to(accelerator.device)
 
     print_num_params(model, accelerator)
 
