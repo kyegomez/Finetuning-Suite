@@ -7,7 +7,7 @@ from transformers import AutoTokenizer
 
 class CFG:
     SEED: int = 42
-    SEQ_LEN: int = 8192
+    SEQ_LEN: int = 8192 # context length make it larger or smaller depending on your task
     NUM_CPU: int = multiprocessing.cpu_count()
     HF_ACCOUNT_REPO: str = "YOUR HF ACCOUNT"
     #ADD YOUR OWN TOKENIZER
