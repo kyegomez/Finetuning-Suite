@@ -9,7 +9,7 @@ import torch
 from transformers.data.processors.utils import (
   DataProcessor, InputExample, InputFeatures)
 from torch.utils.data import (
-  DataLoader, RandomSampler, SequentialSampler, TensorDataset)
+  TensorDataset)
 
 
 logger = logging.getLogger(__name__)

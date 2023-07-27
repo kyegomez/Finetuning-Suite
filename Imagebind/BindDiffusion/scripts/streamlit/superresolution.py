@@ -128,7 +128,7 @@ def run():
         st.text(f"resized input image to size ({width}, {height} (w, h))")
         st.image(image)
 
-        st.write(f"\n Tip: Add a description of the object that should be upscaled, e.g.: 'a professional photograph of a cat'")
+        st.write("\n Tip: Add a description of the object that should be upscaled, e.g.: 'a professional photograph of a cat'")
         prompt = st.text_input("Prompt", "a high quality professional photograph")
 
         seed = st.number_input("Seed", min_value=0, max_value=1000000, value=0)

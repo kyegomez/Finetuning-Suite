@@ -563,7 +563,7 @@ class SpeechT5Task(LegacyFairseqTask):
         except Exception as e:
             args.input_feat_per_channel = 80
             args.input_channels = 1
-            logger.info(f"Cannot set input_feat_per_channel, input_channels, since: ")
+            logger.info("Cannot set input_feat_per_channel, input_channels, since: ")
             logger.warn(e)
             logger.info(f"Set to: {args.input_feat_per_channel} and {args.input_channels}")
 
@@ -592,7 +592,7 @@ class SpeechT5Task(LegacyFairseqTask):
 
     def build_tokenizer(self, args):
         if self.config is None:
-            logger.info(f"pre-tokenizer: None")
+            logger.info("pre-tokenizer: None")
             return encoders.build_tokenizer(Namespace(**{"tokenizer": None}))
         else:
             logger.info(f"pre-tokenizer: {self.config.pre_tokenizer}")

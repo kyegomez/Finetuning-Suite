@@ -110,7 +110,7 @@ class eval:
         # incorrect submission format handling
         try:
             result_dom = xml.dom.minidom.parse(self.resultFile)
-        except Exception as e:
+        except Exception:
             # result_dom = xml.dom.minidom.parse(dummyDom)
             gt_tables = eval.get_table_list(gt_dom)
             retVal = ResultStructure(truePos=0, gtTotal=len(gt_tables), resTotal=0)

@@ -68,7 +68,7 @@ def quantize_model_(model, p=0.2, bits=8, update_step=3000):
             continue
 
         # activation quantization
-        a_q = ActivationQuantizer(quantized_module, p=0, bits=bits, method="histogram")
+        ActivationQuantizer(quantized_module, p=0, bits=bits, method="histogram")
 
         # replace layer by its quantized counterpart
         attrsetter(layer)(model, quantized_module)

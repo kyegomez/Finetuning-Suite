@@ -5,7 +5,6 @@
 """isort:skip_file"""
 
 import logging
-from typing import Dict, Any
 from hydra.core.config_store import ConfigStore
 from fairseq.dataclass.configs import FairseqConfig
 

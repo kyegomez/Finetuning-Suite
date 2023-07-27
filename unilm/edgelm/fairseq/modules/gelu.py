@@ -10,7 +10,6 @@ the corresponding GitHub repo: https://github.com/hendrycks/GELUs
 import math
 
 import torch
-import torch.nn as nn
 
 
 def gelu_accurate(x):

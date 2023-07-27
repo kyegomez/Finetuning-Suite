@@ -5,7 +5,6 @@ __author__ = 'xinya'
 from bleu.bleu import Bleu
 from meteor.meteor import Meteor
 from rouge.rouge import Rouge
-from cider.cider import Cider
 from collections import defaultdict
 from argparse import ArgumentParser
 import string
@@ -179,7 +178,6 @@ def eval(out_file, src_file, tgt_file, isDIn=False, num_pairs=500):
 
     # eval
     from eval import QGEvalCap
-    import json
     from json import encoder
     encoder.FLOAT_REPR = lambda o: format(o, '.4f')
 

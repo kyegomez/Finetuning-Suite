@@ -15,13 +15,9 @@ from fairseq import utils
 from fairseq.model_parallel.modules import ModelParallelTransformerSentenceEncoder
 from fairseq.models import FairseqEncoder, register_model, register_model_architecture
 from fairseq.models.roberta import (
-    RobertaClassificationHead,
-    RobertaEncoder,
-    RobertaLMHead,
     RobertaModel,
 )
-from fairseq.modules import LayerNorm, TransformerSentenceEncoder
-from fairseq.modules.transformer_sentence_encoder import init_bert_params
+from fairseq.modules import LayerNorm
 
 
 try:

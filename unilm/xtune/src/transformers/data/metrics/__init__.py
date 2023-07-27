@@ -37,7 +37,7 @@ if _has_sklearn:
         query2content = {}
         for guid, pred, label in zip(guids, preds, labels):
             query = guid.split("_")[0]
-            if not query in query2content:
+            if query not in query2content:
                 query2content[query] = [[int(pred)], [int(label)]]
             else:
                 query2content[query][0].append(int(pred))     

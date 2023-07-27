@@ -4,8 +4,6 @@
 import logging
 import os
 import sys
-from dataclasses import dataclass, field
-from typing import Optional
 
 import numpy as np
 from datasets import ClassLabel, load_dataset, load_metric
@@ -89,15 +87,13 @@ def main():
         keep_in_memory=True,
     )
     if training_args.do_train:
-        column_names = datasets["train"].column_names
+        datasets["train"].column_names
         features = datasets["train"].features
     else:
-        column_names = datasets["validation"].column_names
+        datasets["validation"].column_names
         features = datasets["validation"].features
-    text_column_name = "input_ids"
     label_column_name = "labels"
 
-    remove_columns = column_names
 
     # In the event the labels are not a `Sequence[ClassLabel]`, we will need to go through the dataset to get the
     # unique labels.
@@ -112,10 +108,10 @@ def main():
     if isinstance(features[label_column_name].feature, ClassLabel):
         label_list = features[label_column_name].feature.names
         # No need to convert the labels since they are already ints.
-        label_to_id = {i: i for i in range(len(label_list))}
+        {i: i for i in range(len(label_list))}
     else:
         label_list = get_label_list(datasets["train"][label_column_name])
-        label_to_id = {l: i for i, l in enumerate(label_list)}
+        {l: i for i, l in enumerate(label_list)}
     num_labels = len(label_list)
 
     # Load pretrained model and tokenizer

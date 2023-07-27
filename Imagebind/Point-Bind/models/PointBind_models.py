@@ -8,18 +8,13 @@
 
 # Modified from github.com/openai/CLIP
 from collections import OrderedDict
-import ipdb
-from PIL import Image
 from imagebind.imagebind_model import ModalityType
-from torchvision import transforms
 from imagebind import imagebind_model
 
 import timm
 from torch import nn
 from data.dataset_3d import  *
 
-from torch.nn.parameter import Parameter
-from easydict import EasyDict
 
 from models.pointbert.point_encoder import PointTransformer_BIND
 from models.i2p_mae.I2P_MAE import I2P_MAE_BIND
@@ -105,14 +100,14 @@ class POINTBIND(nn.Module):
                 'logit_scale': self.logit_scale.exp()}
 
 def PointBind_PointBERT(args):
-    vision_model = timm.create_model('vit_base_patch16_224', num_classes=0)
+    timm.create_model('vit_base_patch16_224', num_classes=0)
     config = cfg_from_yaml_file(POINTBERT_CONFIG)
     point_encoder = PointTransformer_BIND(config.model, args=args)
     model = POINTBIND(point_encoder, pc_feat_dims=768)
     return model
 
 def PointBind_I2PMAE(args=None):
-    vision_model = timm.create_model('vit_base_patch16_224', num_classes=0)
+    timm.create_model('vit_base_patch16_224', num_classes=0)
     point_encoder = I2P_MAE_BIND()
     model = POINTBIND(point_encoder, pc_feat_dims=384)
     return model

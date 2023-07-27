@@ -171,7 +171,7 @@ class DatasetWriter:
         return osp.join(self.output_dir, f"{name}.src{shard_part}")
 
     def var_file(self):
-        return osp.join(self.output_dir, f"vars.pt")
+        return osp.join(self.output_dir, "vars.pt")
 
     def load_config(self):
 

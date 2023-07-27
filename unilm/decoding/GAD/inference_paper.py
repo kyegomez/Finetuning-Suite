@@ -78,7 +78,7 @@ def baseline_generate(data_lines, model, task, device, max_len=200):
     tgt_dict = task.target_dictionary
     data_size = len(data_lines)
     all_results = []
-    logger.info(f'Baseline generate')
+    logger.info('Baseline generate')
     start = time.perf_counter()
     for start_idx in tqdm(range(0, data_size)):
         bpe_line = data_lines[start_idx]
@@ -151,7 +151,7 @@ def gad_generate(data_lines, model, AR_model, task, block_size, device, beta=1, 
         encoder_state_ids.append(AR_model.decoder.layers[i].encoder_attn._incremental_state_id)
     data_size = len(data_lines)
     all_results = []
-    logger.info(f'GAD generate')
+    logger.info('GAD generate')
     pass_tokens = [0] * max_len
     sent_nums = [0] * max_len
     start = time.perf_counter()

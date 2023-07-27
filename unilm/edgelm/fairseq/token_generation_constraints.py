@@ -28,7 +28,7 @@ that many times in the output.
 """
 
 from collections import Counter
-from typing import List, Optional, Set, Tuple
+from typing import List, Set
 
 import torch
 

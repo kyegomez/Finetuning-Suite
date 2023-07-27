@@ -6,11 +6,9 @@
 # This file defines a set of commonly used utility functions.
 # ------------------------------------------
 
-import os
 import re
 import cv2
 import math
-import shutil
 import string
 import textwrap
 import numpy as np

@@ -13,7 +13,6 @@ Modified form: https://github.com/facebookresearch/fairseq/blob/272c4c5197250997
 
 import ast
 import logging
-import math
 import os
 import sys
 from argparse import Namespace

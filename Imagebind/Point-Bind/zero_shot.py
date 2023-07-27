@@ -8,19 +8,14 @@
  * By Le Xue
 '''
 import argparse
-from collections import OrderedDict
-import math
-import time, ipdb
+import time
 import numpy as np
 from imagebind.imagebind_model import ModalityType
 
-import torch.cuda.amp as amp
 import torch.nn.parallel
-import torch.backends.cudnn as cudnn
 import torch.optim
 import torch.utils.data
 import torch.utils.data.distributed
-import torchvision.transforms as transforms
 import collections
 
 from data.dataset_3d import *
@@ -29,7 +24,6 @@ from utils.utils import get_dataset
 import models.PointBind_models as models
 from imagebind.multimodal_preprocessors import SimpleTokenizer
 from utils import utils
-from data.dataset_3d import customized_collate_fn
 
 
 def get_args_parser():

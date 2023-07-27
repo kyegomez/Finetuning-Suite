@@ -12,9 +12,7 @@ Modified form: https://github.com/facebookresearch/fairseq/blob/272c4c5197250997
 """
 
 import torch
-import numpy as np
 
-from fairseq.data.audio.speech_to_text_dataset import S2TDataConfig
 from fairseq.speech_generator import SpeechGenerator
 
 class NonAutoregressiveUnitGenerator(SpeechGenerator):

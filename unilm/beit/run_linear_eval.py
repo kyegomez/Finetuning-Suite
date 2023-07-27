@@ -14,13 +14,11 @@ from pathlib import Path
 
 import torch
 from torch import nn
-import torch.distributed as dist
 import torch.backends.cudnn as cudnn
 from torchvision import datasets
 from torchvision import transforms as pth_transforms
 
 import utils
-import modeling_finetune
 from timm.models import create_model
 
 
@@ -125,7 +123,7 @@ def eval_linear(args):
         optimizer = torch.optim.AdamW(
             linear_classifier.parameters(), learning_rate, weight_decay=1e-4, 
         )
-    print(f"Optimizer = %s" % str(optimizer))
+    print("Optimizer = %s" % str(optimizer))
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, args.epochs, eta_min=0)
 
     # Optionally resume from a checkpoint

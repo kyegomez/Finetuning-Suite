@@ -1,21 +1,18 @@
 import importlib
 import streamlit as st
 import torch
-import cv2
 import numpy as np
 import PIL
 from omegaconf import OmegaConf
 from PIL import Image
 from tqdm import trange
-import io, os
+import os
 from torch import autocast
 from einops import rearrange, repeat
-from torchvision.utils import make_grid
 from pytorch_lightning import seed_everything
 from contextlib import nullcontext
 
 from ldm.models.diffusion.ddim import DDIMSampler
-from ldm.models.diffusion.plms import PLMSSampler
 from ldm.models.diffusion.dpm_solver import DPMSolverSampler
 
 torch.set_grad_enabled(False)
@@ -40,7 +37,7 @@ def get_obj_from_str(string, reload=False):
 
 
 def instantiate_from_config(config):
-    if not "target" in config:
+    if "target" not in config:
         raise KeyError("Expected key `target` to instantiate.")
     return get_obj_from_str(config["target"])(**config.get("params", dict()))
 
@@ -195,7 +192,7 @@ def torch2np(x):
 @st.cache(allow_output_mutation=True, suppress_st_warning=True)
 def init(version="Stable unCLIP-L", load_karlo_prior=False):
     state = dict()
-    if not "model" in state:
+    if "model" not in state:
         if version == "Stable unCLIP-L":
             config = "configs/stable-diffusion/v2-1-stable-unclip-l-inference.yaml"
             ckpt = "checkpoints/sd21-unclip-l.ckpt"
@@ -360,7 +357,7 @@ if __name__ == "__main__":
         adm_cond = torch.stack(adm_inputs).sum(0) / sum(weights)
         if num_inputs > 1:
             if st.checkbox("Apply Noise to Embedding Mix", True):
-                noise_level = st.number_input(f"Noise Augmentation for averaged CLIP embeddings", min_value=0,
+                noise_level = st.number_input("Noise Augmentation for averaged CLIP embeddings", min_value=0,
                                               max_value=state["model"].noise_augmentor.max_noise_level - 1, value=50, )
                 c_adm, noise_level_emb = state["model"].noise_augmentor(
                     adm_cond[:, :state["model"].noise_augmentor.time_embed.dim],

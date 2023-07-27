@@ -3,7 +3,6 @@ import torch
 from torch import Tensor
 
 from examples.simultaneous_translation.utils.functions import (
-    exclusive_cumprod,
     prob_check,
     moving_sum,
 )

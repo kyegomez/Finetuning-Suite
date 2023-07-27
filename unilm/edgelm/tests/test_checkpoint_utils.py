@@ -12,7 +12,6 @@ from io import StringIO
 from unittest.mock import patch
 
 from fairseq import checkpoint_utils
-from omegaconf import OmegaConf
 
 from tests.utils import (
     create_dummy_data,

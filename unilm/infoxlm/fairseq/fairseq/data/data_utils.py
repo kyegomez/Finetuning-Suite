@@ -10,7 +10,6 @@ except ImportError:
 import contextlib
 import itertools
 import os
-import sys
 import types
 
 import numpy as np

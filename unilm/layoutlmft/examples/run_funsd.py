@@ -4,8 +4,6 @@
 import logging
 import os
 import sys
-from dataclasses import dataclass, field
-from typing import Optional
 
 import numpy as np
 from datasets import ClassLabel, load_dataset, load_metric

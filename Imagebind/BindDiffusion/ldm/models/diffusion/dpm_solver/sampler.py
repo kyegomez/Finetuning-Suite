@@ -14,7 +14,8 @@ class DPMSolverSampler(object):
         super().__init__()
         self.model = model
         self.device = device
-        to_torch = lambda x: x.clone().detach().to(torch.float32).to(model.device)
+        def to_torch(x):
+            return x.clone().detach().to(torch.float32).to(model.device)
         self.register_buffer('alphas_cumprod', to_torch(model.alphas_cumprod))
 
     def register_buffer(self, name, attr):

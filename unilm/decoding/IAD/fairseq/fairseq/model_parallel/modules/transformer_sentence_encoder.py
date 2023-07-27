@@ -3,17 +3,9 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-import random
-from typing import Optional, Tuple
 
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
 from fairseq.model_parallel.modules import ModelParallelTransformerSentenceEncoderLayer
 from fairseq.modules import (
-    LayerNorm,
-    MultiheadAttention,
-    PositionalEmbedding,
     TransformerSentenceEncoder,
 )
 

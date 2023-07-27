@@ -5,7 +5,6 @@
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from examples.simultaneous_translation.modules.monotonic_transformer_layer import (
     TransformerMonotonicDecoderLayer,
     TransformerMonotonicEncoderLayer,

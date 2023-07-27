@@ -14,10 +14,10 @@ class SimulTransTextAgent(SimulTransAgent):
         self.word_splitter = {}
 
         self.word_splitter["src"] = SPLITTER_DICT[args.src_splitter_type](
-            getattr(args, f"src_splitter_path")
+            getattr(args, "src_splitter_path")
         )
         self.word_splitter["tgt"] = SPLITTER_DICT[args.tgt_splitter_type](
-            getattr(args, f"tgt_splitter_path")
+            getattr(args, "tgt_splitter_path")
         )
 
     def load_dictionary(self, task):

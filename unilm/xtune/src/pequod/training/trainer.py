@@ -1,7 +1,6 @@
 import os
 import json
 import logging
-import random
 import torch
 import numpy as np
 
@@ -11,8 +10,7 @@ except ImportError:
   pass
 
 from torch.utils.data import (DataLoader, 
-  RandomSampler, SequentialSampler, TensorDataset, SubsetRandomSampler,
-  Subset, ConcatDataset)
+  RandomSampler, SequentialSampler, TensorDataset, Subset, ConcatDataset)
 #from transformers import AdamW, ConstantLRSchedule, WarmupLinearSchedule
 from transformers import AdamW, get_constant_schedule, get_linear_schedule_with_warmup
 

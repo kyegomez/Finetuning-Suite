@@ -1,11 +1,8 @@
-import logging
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
 from fairseq import checkpoint_utils
-from fairseq import utils
 
 from fairseq.models import (
   BaseFairseqModel,
@@ -145,14 +142,14 @@ class InfoXlmModel(BaseFairseqModel):
   @torch.no_grad()
   def update_slow_weight(self, momentum):
     for p1, p2 in zip(self.model_fast.parameters(), self.model_slow.parameters()):
-      assert p2.requires_grad == False
+      assert p2.requires_grad is False
       new_p2_data = p2.data * momentum + p1.data * (1. - momentum)
       p2.data.copy_(new_p2_data)
 
     if self.use_proj:
       p1 = self.proj_matrix_fast.data
       p2 = self.proj_matrix_slow.data
-      assert p2.requires_grad == False
+      assert p2.requires_grad is False
       new_p2_data = p2.data * momentum + p1.data * (1. - momentum)
       p2.data.copy_(new_p2_data)
 

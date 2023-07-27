@@ -1,6 +1,5 @@
 
 import os
-import cv2
 from warp import Curve, Distort, Stretch
 from geometry import Rotate, Perspective, Shrink, TranslateX, TranslateY
 from pattern import VGrid, HGrid, Grid, RectGrid, EllipseGrid
@@ -12,7 +11,6 @@ from process import Posterize, Solarize, Invert, Equalize, AutoContrast, Sharpne
 
 from PIL import Image
 import PIL.ImageOps
-import numpy as np
 import argparse
 
 

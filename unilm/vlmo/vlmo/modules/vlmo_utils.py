@@ -1,14 +1,11 @@
 import torch
-import random
-import json
 
 from transformers.optimization import AdamW
 from transformers import (
     get_polynomial_decay_schedule_with_warmup,
     get_cosine_schedule_with_warmup,
 )
-from vlmo.modules.dist_utils import all_gather
-from vlmo.modules.objectives import compute_irtr_recall, compute_irtr_recall_with_rerank
+from vlmo.modules.objectives import compute_irtr_recall
 from vlmo.gadgets.my_metrics import Accuracy, VQAScore, Scalar
 from pytorch_lightning.utilities.distributed import rank_zero_info
 
@@ -236,7 +233,7 @@ def set_schedule(pl_module):
     decay_power = pl_module.hparams.config["decay_power"]
     optim_type = pl_module.hparams.config["optim_type"]
 
-    names = [n for n, p in pl_module.named_parameters()]
+    [n for n, p in pl_module.named_parameters()]
     optimizer_grouped_parameters = [
         {
             "params": [

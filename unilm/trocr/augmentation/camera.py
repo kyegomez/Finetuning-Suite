@@ -1,11 +1,9 @@
 
-import cv2
 import numpy as np
 import skimage as sk
 from PIL import Image, ImageOps
 from io import BytesIO
 
-from skimage import color
 '''
     PIL resize (W,H)
     cv2 image is BGR

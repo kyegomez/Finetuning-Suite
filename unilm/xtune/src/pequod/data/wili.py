@@ -5,9 +5,8 @@ import os
 import torch
 
 from transformers.data.processors.utils import (DataProcessor,
-  InputExample, InputFeatures)
-from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler,
-                              TensorDataset)
+  InputExample)
+from torch.utils.data import (TensorDataset)
 from src.data import convert_examples_to_features
 from src.io import lines_gen
 

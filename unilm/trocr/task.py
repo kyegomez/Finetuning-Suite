@@ -1,10 +1,8 @@
 import os
 from fairseq import search
 
-from fairseq import scoring, utils, metrics
-from fairseq.data import Dictionary, encoders
+from fairseq.data import Dictionary
 from fairseq.tasks import LegacyFairseqTask, register_task
-from fairseq.tasks.fairseq_task import FairseqTask
 
 try:
     from .data import SROIETextRecognitionDataset, Receipt53KDataset, SyntheticTextRecognitionDataset
@@ -175,7 +173,6 @@ class TextRecognitionTask(LegacyFairseqTask):
             )
 
         from fairseq.sequence_generator import (
-            SequenceGenerator,
             SequenceGeneratorWithAlignment,
         )
         try:

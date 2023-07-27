@@ -21,7 +21,6 @@ import logging
 import os
 import random
 import timeit
-import itertools
 import json
 import copy
 import math
@@ -69,10 +68,10 @@ from transformers.data.metrics.squad_metrics import (
 
 from transformers.data.metrics.evaluate_mlqa import evaluate_with_path as mlqa_evaluate_with_path
 from transformers.data.metrics.evaluate_squad import evaluate_with_path as squad_evaluate_with_path
-from transformers.data.processors.squad import SquadResult, SquadV1Processor, SquadV2Processor, MLQAProcessor, \
+from transformers.data.processors.squad import SquadResult, SquadV1Processor, MLQAProcessor, \
     TyDiQAProcessor, XQuADProcessor
 from transformers.tokenization_bert import whitespace_tokenize
-from transformers.data.processors.squad import _improve_answer_span, _new_check_is_max_context, SquadFeatures
+from transformers.data.processors.squad import _improve_answer_span
 
 try:
     from torch.utils.tensorboard import SummaryWriter
@@ -999,7 +998,7 @@ def train(args, train_examples, train_dataset, model, first_stage_model, tokeniz
                 global_step += 1
 
                 if args.local_rank in [-1, 0] and args.logging_steps > 0 and global_step % args.logging_steps == 0:
-                    cur_result = logging(eval=args.evaluate_steps > 0 and global_step % args.evaluate_steps == 0)
+                    logging(eval=args.evaluate_steps > 0 and global_step % args.evaluate_steps == 0)
                     logging_loss = tr_loss
                     logging_original_loss = tr_original_loss
                     logging_noised_loss = tr_noised_loss
@@ -1171,7 +1170,7 @@ def evaluate(args, model, tokenizer, prefix=""):
             start_n_top = model.config.start_n_top if hasattr(model, "config") else model.module.config.start_n_top
             end_n_top = model.config.end_n_top if hasattr(model, "config") else model.module.config.end_n_top
 
-            predictions = compute_predictions_log_probs(
+            compute_predictions_log_probs(
                 examples,
                 features,
                 all_results,
@@ -1187,7 +1186,7 @@ def evaluate(args, model, tokenizer, prefix=""):
                 args.verbose_logging,
             )
         else:
-            predictions = compute_predictions_logits(
+            compute_predictions_logits(
                 examples,
                 features,
                 all_results,

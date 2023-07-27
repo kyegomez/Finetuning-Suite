@@ -24,11 +24,7 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import collections
 import logging
-import os
-import unicodedata
-from io import open
 
 from transformers.tokenization_bert import BertTokenizer, whitespace_tokenize
 

@@ -1,20 +1,15 @@
 from fairseq.models import FairseqEncoder, register_model, FairseqEncoderDecoderModel, register_model_architecture
 from fairseq.models.transformer import TransformerDecoder, Embedding, TransformerModel
 from fairseq.models.transformer import base_architecture as base_transformer
-from fairseq.models.fairseq_encoder import EncoderOut
-from torch.nn import Parameter
 from fairseq import utils
-from torch import Tensor
 
 import torch
-from torch.hub import load_state_dict_from_url
 
 from timm.models import create_model
 
-from functools import partial
 import logging
 import argparse
-from typing import Dict, Optional, Tuple
+from typing import Optional
 from collections import OrderedDict
 import os
 
@@ -134,7 +129,7 @@ class TrOCRModel(FairseqEncoderDecoderModel):
         if getattr(args, "max_target_positions", None) is None:
             args.max_target_positions = DEFAULT_MAX_TARGET_POSITIONS
 
-        if getattr(args, "decoder_pretrained", None) == None or getattr(args, "decoder_pretrained", None).upper() == 'None':
+        if getattr(args, "decoder_pretrained", None) is None or getattr(args, "decoder_pretrained", None).upper() == 'None':
             logger.info('Decoder is randomly initialized.')            
             decoder_embed_tokens = cls.build_embedding(
                 args, task.target_dictionary, args.decoder_embed_dim, args.decoder_embed_path
@@ -253,7 +248,7 @@ class TrOCRModel(FairseqEncoderDecoderModel):
                 no_encoder_attn=False,
             )            
 
-            if hasattr(args, 'decoder_pretrained_url') and args.decoder_pretrained_url != None and args.decoder_pretrained_url != '':                
+            if hasattr(args, 'decoder_pretrained_url') and args.decoder_pretrained_url is not None and args.decoder_pretrained_url != '':                
                 unilm_url = args.decoder_pretrained_url
                 logger.info('The unilm model url: {}.'.format(unilm_url[:unilm_url.find('?')]))
                 unilm_state_dict = torch.hub.load_state_dict_from_url(unilm_url)            

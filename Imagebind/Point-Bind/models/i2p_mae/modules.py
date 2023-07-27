@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from timm.models.layers import DropPath
 from . import misc
 from knn_cuda import KNN

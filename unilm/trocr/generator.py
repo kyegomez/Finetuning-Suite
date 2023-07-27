@@ -23,7 +23,7 @@ class TextRecognitionGenerator(SequenceGenerator):
             ],
         )
         net_input = sample["net_input"]
-        device = sample["net_input"]["imgs"].device
+        sample["net_input"]["imgs"].device
 
 
         # compute the encoder output for each beam        

@@ -18,10 +18,7 @@
 """Utility functions for retrieval tasks."""
 
 
-import os
-import sys
 import faiss
-import tempfile
 import numpy as np
 
 
@@ -145,7 +142,7 @@ def mine_bitext(x, y, src_text_file, trg_text_file, output_file, mode='mine',
     x2y, y2x = shift_embeddings(x, y)
 
   # calculate knn in both directions
-  if retrieval is not 'bwd':
+  if retrieval != 'bwd':
     print(' - perform {:d}-nn source against target, dist={}'.format(neighborhood, dist))
     if use_shift_embeds:
       # project x to y space, and search k-nn ys for each x
@@ -155,7 +152,7 @@ def mine_bitext(x, y, src_text_file, trg_text_file, output_file, mode='mine',
       x2y_sim, x2y_ind = knn(x, y, min(y.shape[0], neighborhood), use_gpu, dist)
       x2y_mean = x2y_sim.mean(axis=1)
 
-  if retrieval is not 'fwd':
+  if retrieval != 'fwd':
     print(' - perform {:d}-nn target against source, dist={}'.format(neighborhood, dist))
     if use_shift_embeds:
       y2x_sim, y2x_ind = knn(y2x, x, min(x.shape[0], neighborhood), use_gpu, dist)
@@ -166,11 +163,14 @@ def mine_bitext(x, y, src_text_file, trg_text_file, output_file, mode='mine',
 
   # margin function
   if margin == 'absolute':
-    margin = lambda a, b: a
+    def margin(a, b):
+      return a
   elif margin == 'distance':
-    margin = lambda a, b: a - b
+    def margin(a, b):
+      return a - b
   else:  # margin == 'ratio':
-    margin = lambda a, b: a / b
+    def margin(a, b):
+      return a / b
 
   fout = open(output_file, mode='w', encoding=encoding, errors='surrogateescape')
 
@@ -222,7 +222,7 @@ def mine_bitext(x, y, src_text_file, trg_text_file, output_file, mode='mine',
       seen_src, seen_trg = set(), set()
       for i in np.argsort(-scores):
         src_ind, trg_ind = indices[i]
-        if not src_ind in seen_src and not trg_ind in seen_trg:
+        if src_ind not in seen_src and trg_ind not in seen_trg:
           seen_src.add(src_ind)
           seen_trg.add(trg_ind)
           if scores[i] > threshold:
@@ -330,7 +330,7 @@ def bucc_eval(candidates_file, gold_file, src_file, trg_file, src_id_file, trg_i
 
 
 def similarity_search(x, y, dim, normalize=False):
-  num = x.shape[0]
+  x.shape[0]
   idx = faiss.IndexFlatL2(dim)
   if normalize:
     faiss.normalize_L2(x)

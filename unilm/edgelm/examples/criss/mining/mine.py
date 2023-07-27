@@ -153,7 +153,8 @@ if __name__ == "__main__":
 
     x_batches_f, x_sents_f = get_batches(args.src_dir, args.src_lang)
     y_batches_f, y_sents_f = get_batches(args.tgt_dir, args.tgt_lang)
-    margin = lambda a, b: a / b
+    def margin(a, b):
+        return a / b
     y2x_sim, y2x_ind = knnGPU_sharded(
         y_batches_f, x_batches_f, args.dim, args.neighborhood, direction="y2x"
     )

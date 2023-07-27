@@ -1,8 +1,7 @@
 import numpy as np
 import torch
 
-from fairseq.data import data_utils, FairseqDataset, MaskTokensDataset, TruncateDataset, BaseWrapperDataset
-from infoxlm.data.dict_dataset import DictDataset
+from fairseq.data import data_utils, FairseqDataset, MaskTokensDataset
 
 
 def get_xlco_dataset(args, dataset_path, vocab, mask_idx, combine=False):

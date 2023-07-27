@@ -1,6 +1,5 @@
 # Copyright (c) 2015-present, Facebook, Inc.
 # All rights reserved.
-import os
 import logging
 import torch
 import torch.nn as nn
@@ -10,7 +9,6 @@ from functools import partial
 from timm.models.vision_transformer import VisionTransformer, _cfg
 from timm.models.vision_transformer import Attention, Block
 from timm.models.registry import register_model
-from timm.models.layers import trunc_normal_
 
 logger = logging.getLogger(__name__)
 

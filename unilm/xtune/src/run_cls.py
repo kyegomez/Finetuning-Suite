@@ -16,7 +16,6 @@
 """ Finetuning multi-lingual models on classification (Bert, DistilBERT, XLM, XLM-R). Adapted from `examples/run_glue.py`"""
 
 import argparse
-import glob
 import logging
 import os
 import random
@@ -26,12 +25,11 @@ import math
 
 import numpy as np
 import torch
-from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, TensorDataset, ConcatDataset, Subset
+from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, TensorDataset, ConcatDataset
 from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm, trange
 
 from transformers import (
-    WEIGHTS_NAME,
     AdamW,
     BertConfig,
     BertForSequenceClassification,
@@ -882,7 +880,7 @@ def predict(args, model, tokenizer, label_list, prefix="", single_gpu=False, ver
         model = torch.nn.DataParallel(model)
 
     for split, lang in eval_datasets:
-        task_name = "{0}-{1}".format(split, lang)
+        "{0}-{1}".format(split, lang)
         eval_dataset, guids = load_and_cache_examples(args, eval_task, tokenizer, lang, split=split)
         if not os.path.exists(eval_output_dir) and args.local_rank in [-1, 0]:
             os.makedirs(eval_output_dir)
@@ -896,10 +894,8 @@ def predict(args, model, tokenizer, label_list, prefix="", single_gpu=False, ver
         logger.info("***** Running evaluation {} *****".format(prefix))
         logger.info("  Num examples = %d", len(eval_dataset))
         logger.info("  Batch size = %d", args.eval_batch_size)
-        eval_loss = 0.0
         nb_eval_steps = 0
         preds = None
-        out_label_ids = None
         guids = np.array(guids)
         for batch in tqdm(eval_dataloader, desc="Evaluating"):
             model.eval()
@@ -1521,7 +1517,6 @@ def main():
         best_checkpoint = os.path.join(args.output_dir, 'checkpoint-best')
     else:
         best_checkpoint = args.output_dir
-    best_f1 = 0
 
     results = {}
     if args.do_eval and args.local_rank in [-1, 0]:

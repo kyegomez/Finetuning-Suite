@@ -14,7 +14,7 @@ except ImportError:
 
 from collections import defaultdict
 
-from ..utils import get_local_rank, print_on_rank0
+from ..utils import get_local_rank
 
 
 class VectorRetriever(object):

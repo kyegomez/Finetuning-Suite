@@ -1,7 +1,6 @@
 import os
 
-from fairseq.tasks import register_task, FairseqTask
-from fairseq.data.dictionary import Dictionary
+from fairseq.tasks import register_task
 from infoxlm.data import mlm_utils
 from infoxlm.data.dict_dataset import DictDataset
 from infoxlm.tasks.mlm import Mlm

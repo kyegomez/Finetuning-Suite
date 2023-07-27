@@ -30,7 +30,6 @@ from engine_for_vqkd import evaluate, train_one_epoch, calculate_codebook_usage
 from utils import NativeScalerWithGradNormCount as NativeScaler
 import utils
 
-import modeling_vqkd
 
 
 

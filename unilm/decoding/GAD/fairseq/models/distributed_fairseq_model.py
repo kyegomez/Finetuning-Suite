@@ -4,11 +4,7 @@
 # LICENSE file in the root directory of this source tree.
 
 import logging
-import os
-import signal
-import threading
 
-import torch
 import torch.nn as nn
 from torch.nn.parallel import DistributedDataParallel
 

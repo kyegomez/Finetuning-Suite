@@ -1,7 +1,6 @@
 import os
 from PIL import Image
 import xml.etree.ElementTree as ET
-import numpy as np
 import json
 from PIL import Image
 from shutil import copyfile

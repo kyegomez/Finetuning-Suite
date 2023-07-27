@@ -196,7 +196,6 @@ def get_args():
     if known_args.enable_deepspeed:
         try:
             import deepspeed
-            from deepspeed import DeepSpeedConfig
             parser = deepspeed.add_config_arguments(parser)
             ds_init = deepspeed.initialize
         except:

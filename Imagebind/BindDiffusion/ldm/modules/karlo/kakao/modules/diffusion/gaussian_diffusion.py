@@ -339,7 +339,7 @@ class GaussianDiffusion(th.nn.Module):
         if isinstance(model_output, tuple):
             model_output, extra = model_output
         else:
-            extra = None
+            pass
 
         if self.model_var_type in [ModelVarType.LEARNED, ModelVarType.LEARNED_RANGE]:
             assert model_output.shape == (B, C * 2, *x.shape[2:])

@@ -22,7 +22,6 @@ from fairseq.data import (
     LanguagePairDataset,
     PrependTokenDataset,
     StripTokenDataset,
-    TruncateDataset,
     RandomCropDataset,
     data_utils,
     indexed_dataset,

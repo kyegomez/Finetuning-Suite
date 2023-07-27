@@ -26,7 +26,6 @@ from transformers import apply_chunking_to_forward
 from transformers.modeling_outputs import (
     BaseModelOutputWithPastAndCrossAttentions,
     BaseModelOutputWithPoolingAndCrossAttentions,
-    MaskedLMOutput,
     TokenClassifierOutput,
     QuestionAnsweringModelOutput,
     SequenceClassifierOutput,
@@ -34,7 +33,6 @@ from transformers.modeling_outputs import (
 from transformers.modeling_utils import PreTrainedModel, find_pruneable_heads_and_indices, prune_linear_layer
 from transformers.models.roberta.modeling_roberta import (
     RobertaIntermediate,
-    RobertaLMHead,
     RobertaOutput,
     RobertaSelfOutput,
 )
@@ -535,8 +533,8 @@ class LayoutLMv3Encoder(nn.Module):
         if valid_span is not None:
             # for the text part, if two words are not in the same line,
             # set their distance to the max value (position_ids.shape[-1])
-            rel_pos_mat[(rel_pos_mat > 0) & (valid_span == False)] = position_ids.shape[1]
-            rel_pos_mat[(rel_pos_mat < 0) & (valid_span == False)] = -position_ids.shape[1]
+            rel_pos_mat[(rel_pos_mat > 0) & (valid_span is False)] = position_ids.shape[1]
+            rel_pos_mat[(rel_pos_mat < 0) & (valid_span is False)] = -position_ids.shape[1]
 
             # image-text, minimum distance
             rel_pos_mat[:, -VISUAL_NUM:, :-VISUAL_NUM] = 0

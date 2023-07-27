@@ -1,7 +1,6 @@
 import os
 import logging
 import functools
-import json
 import time
 from datetime import datetime
 

@@ -1,18 +1,14 @@
 import collections
-import logging
 import math
 import torch
-import numpy as np
 
 from torch import nn
 from torch.nn import functional as F
-from torch import distributed
 
 from fairseq import utils
 from fairseq.criterions import FairseqCriterion, register_criterion
-from fairseq.data.data_utils import process_bpe_symbol
 
-from infoxlm.utils import _get_logging_loss, construct_idx_tensor_from_list
+from infoxlm.utils import _get_logging_loss
 
 
 @register_criterion('dwa_mlm_tlm')
@@ -305,7 +301,7 @@ class DwaMlmTlm(FairseqCriterion):
     loss = fwd_loss + bwd_loss
     em_cnt = fwd_em_cnt + bwd_em_cnt
     tot = fwd_tot + bwd_tot
-    em = 0 if tot == 0 else 100.0 * em_cnt / tot
+    0 if tot == 0 else 100.0 * em_cnt / tot
 
     sample_size = tot
     logging_output = {

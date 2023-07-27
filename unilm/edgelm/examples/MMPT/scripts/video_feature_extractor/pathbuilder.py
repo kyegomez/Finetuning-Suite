@@ -5,7 +5,6 @@
 import os
 import urllib.parse
 import json
-import pandas as pd
 
 from tqdm import tqdm
 

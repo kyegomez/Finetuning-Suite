@@ -1,10 +1,6 @@
-import torch
 
-from fairseq.data import (data_utils,
-  TokenBlockDataset, PrependTokenDataset, PadDataset, TruncateDataset,
-  NumelDataset, NumSamplesDataset, NestedDictionaryDataset, 
-  MaskTokensDataset, AppendTokenDataset, )
-from fairseq.data.encoders.utils import get_whole_word_mask
+from fairseq.data import (PadDataset, NumelDataset, NumSamplesDataset, NestedDictionaryDataset, 
+  MaskTokensDataset, )
 
 from infoxlm.data.mlm_utils import get_prepended_token_block_dataset
 from infoxlm.data.offset_dataset import OffsetDataset

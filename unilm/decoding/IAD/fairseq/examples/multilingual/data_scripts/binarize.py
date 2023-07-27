@@ -4,7 +4,6 @@ from subprocess import check_call, check_output
 import glob
 import argparse
 import shutil
-import pathlib
 import itertools
 
 def call_output(cmd):
@@ -82,7 +81,7 @@ def binarize_(
         "fairseq-preprocess",
         f"--source-lang {src} --target-lang {tgt}",
         f"--destdir {databin_dir}/",
-        f"--workers 8",
+        "--workers 8",
     ]
     if isinstance(spm_vocab, tuple):
         src_vocab, tgt_vocab = spm_vocab
@@ -95,7 +94,7 @@ def binarize_(
     else:
         cmds.extend(
             [
-                f"--joined-dictionary",
+                "--joined-dictionary",
                 f"--srcdict {spm_vocab}",
             ]
         )

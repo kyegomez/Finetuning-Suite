@@ -4,7 +4,6 @@
 # LICENSE file in the root directory of this source tree.
 
 from dataclasses import dataclass, field
-from math import log
 import torch
 from fairseq import utils
 from fairseq.data import LanguagePairDataset
@@ -13,8 +12,6 @@ from fairseq.tasks import register_task
 from fairseq.tasks.translation import TranslationConfig, TranslationTask, load_langpair_dataset
 from fairseq.utils import new_arange
 import logging
-from omegaconf import II
-import numpy as np
 
 NOISE_CHOICES = ChoiceEnum(["random_delete", "random_mask", "no_noise", "full_mask", "block_mask"])
 

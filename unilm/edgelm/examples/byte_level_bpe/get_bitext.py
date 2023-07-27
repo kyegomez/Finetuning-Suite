@@ -89,7 +89,7 @@ def _get_bpe(in_path: str, model_prefix: str, vocab_size: int):
     arguments = [
         f"--input={in_path}",
         f"--model_prefix={model_prefix}",
-        f"--model_type=bpe",
+        "--model_type=bpe",
         f"--vocab_size={vocab_size}",
         "--character_coverage=1.0",
         "--normalization_rule_name=identity",

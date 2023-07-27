@@ -1,10 +1,7 @@
 import os
 import torch
 
-from functools import lru_cache
-from fairseq.tasks import register_task, FairseqTask
-from fairseq.data.dictionary import Dictionary
-from fairseq.data import FairseqDataset
+from fairseq.tasks import register_task
 from fairseq import utils
 
 from infoxlm.data import mlm_utils

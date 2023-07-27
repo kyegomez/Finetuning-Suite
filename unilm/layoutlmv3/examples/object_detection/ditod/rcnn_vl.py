@@ -1,22 +1,14 @@
 # Copyright (c) Facebook, Inc. and its affiliates.
-import logging
-import numpy as np
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 import torch
-from torch import nn
 
-from detectron2.config import configurable
-from detectron2.structures import ImageList, Instances
+from detectron2.structures import Instances
 from detectron2.utils.events import get_event_storage
 
-from detectron2.modeling.backbone import Backbone, build_backbone
 from detectron2.modeling.meta_arch.build import META_ARCH_REGISTRY
 
 from detectron2.modeling.meta_arch import GeneralizedRCNN
 
-from detectron2.modeling.postprocessing import detector_postprocess
-from detectron2.modeling.roi_heads.fast_rcnn import fast_rcnn_inference_single_image
-from contextlib import contextmanager
 from itertools import count
 
 @META_ARCH_REGISTRY.register()

@@ -11,14 +11,12 @@
 # https://github.com/facebookresearch/dino
 # --------------------------------------------------------'
 
-from cgitb import enable
 import math
 import sys
 from typing import Iterable
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
 import utils
 

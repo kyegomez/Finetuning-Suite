@@ -16,7 +16,7 @@
 import logging
 import math
 import random
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Optional, Tuple
 
 import torch
 import torch.nn.functional as F

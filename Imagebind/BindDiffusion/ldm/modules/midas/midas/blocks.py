@@ -5,7 +5,6 @@ from .vit import (
     _make_pretrained_vitb_rn50_384,
     _make_pretrained_vitl16_384,
     _make_pretrained_vitb16_384,
-    forward_vit,
 )
 
 def _make_encoder(backbone, features, use_pretrained, groups=1, expand=False, exportable=True, hooks=None, use_vit_only=False, use_readout="ignore",):
@@ -53,7 +52,7 @@ def _make_scratch(in_shape, out_shape, groups=1, expand=False):
     out_shape2 = out_shape
     out_shape3 = out_shape
     out_shape4 = out_shape
-    if expand==True:
+    if expand is True:
         out_shape1 = out_shape
         out_shape2 = out_shape*2
         out_shape3 = out_shape*4
@@ -252,7 +251,7 @@ class ResidualConvUnit_custom(nn.Module):
             features, features, kernel_size=3, stride=1, padding=1, bias=True, groups=self.groups
         )
 
-        if self.bn==True:
+        if self.bn is True:
             self.bn1 = nn.BatchNorm2d(features)
             self.bn2 = nn.BatchNorm2d(features)
 
@@ -272,12 +271,12 @@ class ResidualConvUnit_custom(nn.Module):
         
         out = self.activation(x)
         out = self.conv1(out)
-        if self.bn==True:
+        if self.bn is True:
             out = self.bn1(out)
        
         out = self.activation(out)
         out = self.conv2(out)
-        if self.bn==True:
+        if self.bn is True:
             out = self.bn2(out)
 
         if self.groups > 1:
@@ -307,7 +306,7 @@ class FeatureFusionBlock_custom(nn.Module):
 
         self.expand = expand
         out_features = features
-        if self.expand==True:
+        if self.expand is True:
             out_features = features//2
         
         self.out_conv = nn.Conv2d(features, out_features, kernel_size=1, stride=1, padding=0, bias=True, groups=1)

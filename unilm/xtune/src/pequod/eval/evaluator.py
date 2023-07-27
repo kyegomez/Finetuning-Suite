@@ -1,5 +1,4 @@
 import logging
-import torch
 
 from torch.utils.data import DataLoader
 from src.pequod.training.trainer import to_cuda

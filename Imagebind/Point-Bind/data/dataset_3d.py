@@ -6,7 +6,6 @@
  * By Le Xue
 '''
 
-import random
 
 import torch
 import numpy as np
@@ -15,7 +14,6 @@ import torch.utils.data as data
 import yaml
 from easydict import EasyDict
 
-from utils.io import IO
 from utils.build import DATASETS
 from utils.logger import *
 from utils.build import build_dataset_from_cfg
@@ -23,7 +21,6 @@ import json
 from tqdm import tqdm
 import pickle
 from PIL import Image
-from imagebind.multimodal_preprocessors import SimpleTokenizer
 
 def pil_loader(path):
     # open path as file to avoid ResourceWarning (https://github.com/python-pillow/Pillow/issues/835)
@@ -153,7 +150,7 @@ def rotate_perturbation_point_cloud(batch_data, angle_sigma=0.06, angle_clip=0.1
         rotated_data[k, ...] = np.dot(shape_pc.reshape((-1, 3)), R)
     return rotated_data
 
-import os, sys, h5py
+import os, sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)

@@ -10,19 +10,15 @@ import copy
 import json
 import math
 import logging
-import tarfile
-import tempfile
-import shutil
 import numpy as np
 
 from functools import partial
 
 import torch
 from torch import nn
-from torch.nn import CrossEntropyLoss, MSELoss
+from torch.nn import CrossEntropyLoss
 import torch.nn.functional as F
 
-from transformers.file_utils import cached_path
 
 from torch.nn.modules.loss import _Loss
 
@@ -1239,7 +1235,6 @@ class BertForSeq2SeqDecoder(PreTrainedBertModel):
         output_shape = list(token_type_ids.size())
         output_length = output_shape[1]
 
-        output_ids = []
         prev_embedding = None
         prev_encoded_layers = None
         curr_ids = input_ids

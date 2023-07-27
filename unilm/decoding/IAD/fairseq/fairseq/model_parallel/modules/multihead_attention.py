@@ -6,7 +6,6 @@
 from typing import Dict, Optional, Tuple
 
 import torch
-import torch.nn.functional as F
 from fairseq import utils
 from fairseq.incremental_decoding_utils import with_incremental_state
 from fairseq.modules.fairseq_dropout import FairseqDropout

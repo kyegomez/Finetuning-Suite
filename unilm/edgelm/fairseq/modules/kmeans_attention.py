@@ -421,7 +421,8 @@ class KmeansAttention(nn.Module):
         k = batched_index_select(k, kv_indices)
         v = batched_index_select(v, kv_indices)
 
-        reshape_with_window = lambda x: x.reshape(b, h, nc, -1, d)
+        def reshape_with_window(x):
+            return x.reshape(b, h, nc, -1, d)
         q, k, v = map(reshape_with_window, (q, k, v))
 
         m_k, m_v = map(lambda x: expand_dim(x, 0, b).to(q), (self.mem_key, self.mem_value))
@@ -568,7 +569,8 @@ class SelfAttention(nn.Module):
         b, t, _, h, dh = *x.shape, self.heads, self.dim_head
         has_local, has_global = map(lambda x: x > 0, (self.local_attn_heads, self.global_attn_heads))
 
-        split_heads = lambda v: reshape_dim(v, -1, (-1, dh)).transpose(1, 2).contiguous()
+        def split_heads(v):
+            return reshape_dim(v, -1, (-1, dh)).transpose(1, 2).contiguous()
 
         if has_local:
             local_qkv = self.local_to_qkv(x).chunk(3, dim=-1)

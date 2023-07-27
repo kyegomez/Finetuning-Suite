@@ -178,7 +178,6 @@ class SpeechLMEncoder(FairseqEncoder):
 
         super().__init__(pretrain_task.source_dictionary)
 
-        d = w2v_args.model.encoder_embed_dim
 
         self.w2v_model = model
 

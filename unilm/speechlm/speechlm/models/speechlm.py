@@ -16,7 +16,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from fairseq import utils, checkpoint_utils
+from fairseq import checkpoint_utils
 from fairseq.data.data_utils import compute_mask_indices
 from fairseq.data.dictionary import Dictionary
 from fairseq.dataclass import ChoiceEnum
@@ -589,7 +589,7 @@ class SpeechlmModel(BaseFairseqModel):
         mask: bool = True,
         output_layer: Optional[int] = None,
     ) -> Dict[str, torch.Tensor]:
-        assert self.add_unit_encoder, f"Can not forward unit-text branch without unit_encoder!"
+        assert self.add_unit_encoder, "Can not forward unit-text branch without unit_encoder!"
 
         padding_mask = src_tokens == self.padding_idx
         unit_embeddings = self.unit_embed_tokens(src_tokens)

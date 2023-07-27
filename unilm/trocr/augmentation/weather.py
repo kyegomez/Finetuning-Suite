@@ -2,11 +2,9 @@ import cv2
 import numpy as np
 import math
 from PIL import Image, ImageOps, ImageDraw
-from skimage import color
-from scipy import interpolate
 from pkg_resources import resource_filename
 from io import BytesIO
-from .ops import plasma_fractal, clipped_zoom, MotionImage
+from .ops import plasma_fractal, MotionImage
 
 '''
     PIL resize (W,H)

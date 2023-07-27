@@ -486,10 +486,10 @@ def beit_huge_patch14_224_8k_vocab(pretrained=False, **kwargs):
     if "num_classes" in kwargs:
         _ = kwargs.pop("num_classes")
     if 'vocab_size' in kwargs:
-        vocab_size = kwargs['vocab_size']
+        kwargs['vocab_size']
         _ = kwargs.pop("vocab_size")
     else:
-        vocab_size = 8192
+        pass
     model = VisionTransformerForMaskedImageModeling(
         patch_size=14, embed_dim=1280, depth=32, num_heads=16, mlp_ratio=4, qkv_bias=True,
         norm_layer=partial(nn.LayerNorm, eps=1e-6), vocab_size=8192, **kwargs)

@@ -3,14 +3,11 @@ import cv2
 import numpy as np
 from PIL import Image, ImageOps
 import torchvision.transforms as transforms
-from wand.image import Image as WandImage
-from scipy.ndimage import zoom as scizoom
 from skimage.filters import gaussian
-from wand.api import library as wandlibrary
 from io import BytesIO
 
 #from skimage import color
-from .ops import MotionImage, clipped_zoom, disk, plasma_fractal
+from .ops import MotionImage, disk
 '''
     PIL resize (W,H)
 '''
@@ -162,8 +159,7 @@ class ZoomBlur:
 
         c = c[index]
 
-        n_channels = len(img.getbands())
-        isgray = n_channels == 1
+        len(img.getbands())
 
         uint8_img = img
         img = (np.array(img) / 255.).astype(np.float32)

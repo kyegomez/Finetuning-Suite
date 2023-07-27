@@ -5,7 +5,6 @@ import torch
 
 from torch import nn
 from torch.nn import functional as F
-from torch import distributed
 
 from fairseq import utils
 from fairseq.criterions import FairseqCriterion, register_criterion
@@ -93,7 +92,6 @@ class XlCoCriterion(FairseqCriterion):
       cxlm_ncorrect = 0
     
     if model.training:
-      rank = self.args.distributed_rank
       model.update_queue(slow_rep)
 
     sample_size = sample["nsentences"]

@@ -6,7 +6,6 @@
 import logging
 
 import torch.nn as nn
-import torch.nn.functional as F
 from fairseq.model_parallel.modules import (
     ModelParallelTransformerDecoderLayer,
     ModelParallelTransformerEncoderLayer,

@@ -11,19 +11,13 @@
 # https://github.com/facebookresearch/dino
 # --------------------------------------------------------'
 
-import os
-import sys
 import argparse
 
-import torch
-from torch import nn
 from torchvision import transforms as pth_transforms
 from timm.models import create_model
 
 from PIL import Image
 
-import utils
-import modeling_vqkd 
 
 def get_code(args):
     # ============ preparing data ... ============

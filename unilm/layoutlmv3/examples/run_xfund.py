@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from typing import Optional
 
 import numpy as np
-from datasets import ClassLabel, load_dataset, load_metric
+from datasets import load_metric
 
 import transformers
 

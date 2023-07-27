@@ -9,7 +9,7 @@ import os
 from collections import OrderedDict
 
 import torch
-from fairseq import metrics, options, utils
+from fairseq import metrics, utils
 from fairseq.data import (
     Dictionary,
     LanguagePairDataset,

@@ -12,7 +12,6 @@ on the aggregation context in which the logging occurs. See the
 """
 
 import contextlib
-import time
 import uuid
 from collections import OrderedDict, defaultdict
 from typing import Callable, Dict, List, Optional

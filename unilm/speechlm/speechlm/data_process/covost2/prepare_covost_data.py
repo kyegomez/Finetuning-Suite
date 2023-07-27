@@ -21,7 +21,6 @@ import pandas as pd
 import torchaudio
 from examples.speech_to_text.data_utils import (
     filter_manifest_df,
-    gen_config_yaml,
     gen_vocab,
     load_df_from_tsv,
     save_df_to_tsv,

@@ -5,9 +5,8 @@ import random
 import torch
 import numpy as np
 import logging
-from enum import Enum
 from .augmentation.warp import Curve, Distort, Stretch
-from .augmentation.geometry import Rotate, Perspective, Shrink, TranslateX, TranslateY
+from .augmentation.geometry import Rotate, Perspective, Shrink
 from .augmentation.pattern import VGrid, HGrid, Grid, RectGrid, EllipseGrid
 from .augmentation.noise import GaussianNoise, ShotNoise, ImpulseNoise, SpeckleNoise
 from .augmentation.blur import GaussianBlur, DefocusBlur, MotionBlur, GlassBlur, ZoomBlur
@@ -36,7 +35,7 @@ class ResizePad(object):
     def __init__(self, imgH=64, imgW=3072, keep_ratio_with_pad=True):
         self.imgH = imgH
         self.imgW = imgW
-        assert keep_ratio_with_pad == True
+        assert keep_ratio_with_pad is True
         self.keep_ratio_with_pad = keep_ratio_with_pad
 
     def __call__(self, im):        

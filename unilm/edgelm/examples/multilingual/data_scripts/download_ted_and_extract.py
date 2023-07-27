@@ -13,7 +13,7 @@ import io
 import wget
 import sys
 
-from subprocess import check_call, check_output
+from subprocess import check_call
 
 # scripts and data locations
 CWD = os.getcwd()
@@ -264,7 +264,7 @@ def download_and_extract(download_to, extract_to):
     else:
         filename = wget.download(url, filename, bar=bar_custom)
     if os.path.exists(f'{extract_to}/all_talks_train.tsv'):
-        print(f'Already extracted so skip')
+        print('Already extracted so skip')
     else:
         extract_cmd = f'tar xzfv "{filename}" -C "{extract_to}"'
         call(extract_cmd)
@@ -293,7 +293,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     import sys
-    import json
 
     # TED Talks data directory
     ted_data_path = args.ted_data_path

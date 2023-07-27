@@ -31,7 +31,6 @@ from engine_for_finetuning import train_one_epoch, evaluate
 from utils import NativeScalerWithGradNormCount as NativeScaler
 import utils
 from scipy import interpolate
-import modeling_finetune
 
 
 def get_args():
@@ -202,7 +201,6 @@ def get_args():
     if known_args.enable_deepspeed:
         try:
             import deepspeed
-            from deepspeed import DeepSpeedConfig
             parser = deepspeed.add_config_arguments(parser)
             ds_init = deepspeed.initialize
         except:

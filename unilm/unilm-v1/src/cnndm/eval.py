@@ -9,19 +9,15 @@ import logging
 import glob
 import json
 import argparse
-import math
 import string
 from multiprocessing import Pool, cpu_count
-from tqdm import tqdm, trange
 from pathlib import Path
-import numpy as np
 # pip install py-rouge
 import rouge
 import time
 import tempfile
 import shutil
 
-from pytorch_pretrained_bert.tokenization import BertTokenizer
 # pip install pyrouge
 from cnndm.bs_pyrouge import Rouge155
 

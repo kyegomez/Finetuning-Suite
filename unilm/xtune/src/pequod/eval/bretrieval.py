@@ -1,4 +1,3 @@
-import faiss
 import json
 import logging
 import numpy as np
@@ -76,7 +75,6 @@ class BuccEvaluator(Evaluator):
     args = self.args
     self.model.eval()
 
-    best_threshold = None
     SL, TL = args.src_language, args.tgt_language
     for split in ['test']:
     # for split in ['dev', 'test']:
@@ -123,7 +121,7 @@ class BuccEvaluator(Evaluator):
             with open(os.path.join(args.output_dir,  'final.txt'), 'w', encoding='utf-8') as f:
               f.write(json.dumps(results))
 
-            best_threshold = results['best-threshold']
+            results['best-threshold']
             logger.info('--Candidates: {}'.format(cand2score_file))
             logger.info(' '.join('{}={:.4f}'.format(k,v) for k,v in results.items()))
       # if args.layer_ensemble:

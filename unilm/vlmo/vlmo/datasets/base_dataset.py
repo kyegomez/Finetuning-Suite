@@ -192,7 +192,7 @@ class BaseDataset(torch.utils.data.Dataset):
         if len(txt_keys) != 0:
             texts = [[d[0] for d in dict_batch[txt_key]] for txt_key in txt_keys]
             encodings = [[d[1] for d in dict_batch[txt_key]] for txt_key in txt_keys]
-            draw_text_len = len(encodings)
+            len(encodings)
             flatten_encodings = [e for encoding in encodings for e in encoding]
             flatten_mlms = mlm_collator(flatten_encodings)
 

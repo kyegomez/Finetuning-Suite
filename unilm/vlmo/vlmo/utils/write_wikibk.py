@@ -1,12 +1,9 @@
-import json
 import pandas as pd
 import pyarrow as pa
 import gc
-import random
 import os
 
 from tqdm import tqdm
-from glob import glob
 
 
 def path2rest(line):

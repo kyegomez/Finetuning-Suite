@@ -13,7 +13,6 @@ Modified from https://github.com/facebookresearch/fairseq/tree/272c4c51972509971
 
 import argparse
 import numpy as np
-import sys
 from g2p_en import G2p
 from tqdm import tqdm
 import logging

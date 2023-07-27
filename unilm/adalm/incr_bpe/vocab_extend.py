@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 from __future__ import division
 
-from numpy.core.fromnumeric import argsort
 from text_encoder import SubwordTextEncoder
 import tokenizer
 import tempfile

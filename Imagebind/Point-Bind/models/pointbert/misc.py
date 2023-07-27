@@ -7,7 +7,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import os
 from collections import abc
-from pointnet2_ops import pointnet2_utils
 
 def index_points(points, idx):
     """
@@ -54,7 +53,8 @@ def worker_init_fn(worker_id):
 
 def build_lambda_sche(opti, config):
     if config.get('decay_step') is not None:
-        lr_lbmd = lambda e: max(config.lr_decay ** (e / config.decay_step), config.lowest_decay)
+        def lr_lbmd(e):
+            return max(config.lr_decay ** (e / config.decay_step), config.lowest_decay)
         scheduler = torch.optim.lr_scheduler.LambdaLR(opti, lr_lbmd)
     else:
         raise NotImplementedError()
@@ -62,7 +62,8 @@ def build_lambda_sche(opti, config):
 
 def build_lambda_bnsche(model, config):
     if config.get('decay_step') is not None:
-        bnm_lmbd = lambda e: max(config.bn_momentum * config.bn_decay ** (e / config.decay_step), config.lowest_decay)
+        def bnm_lmbd(e):
+            return max(config.bn_momentum * config.bn_decay ** (e / config.decay_step), config.lowest_decay)
         bnm_scheduler = BNMomentumScheduler(model, bnm_lmbd)
     else:
         raise NotImplementedError()
@@ -243,7 +244,7 @@ def visualize_KITTI(path, data_list, titles = ['input','pred'], cmap=['bwr','aut
         color = data[:,0] /cmax
         ax = fig.add_subplot(1, len(data_list) , i + 1, projection='3d')
         ax.view_init(30, -120)
-        b = ax.scatter(data[:, 0], data[:, 1], data[:, 2], zdir=zdir, c=color,vmin=-1,vmax=1 ,cmap = cmap[0],s=4,linewidth=0.05, edgecolors = 'black')
+        ax.scatter(data[:, 0], data[:, 1], data[:, 2], zdir=zdir, c=color,vmin=-1,vmax=1 ,cmap = cmap[0],s=4,linewidth=0.05, edgecolors = 'black')
         ax.set_title(titles[i])
 
         ax.set_axis_off()

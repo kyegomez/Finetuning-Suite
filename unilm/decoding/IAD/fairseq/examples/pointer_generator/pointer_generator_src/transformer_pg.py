@@ -8,7 +8,7 @@ from typing import Any, Dict, Optional
 
 import torch
 import torch.nn as nn
-from fairseq import metrics, utils
+from fairseq import utils
 from fairseq.models import register_model, register_model_architecture
 from fairseq.models.fairseq_encoder import EncoderOut
 from fairseq.models.transformer import (

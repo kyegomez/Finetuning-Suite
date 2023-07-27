@@ -328,7 +328,7 @@ def main(opt):
                                              x_T=start_code)
             print("Running a forward pass for decoder")
             for _ in range(3):
-                x_samples_ddim = model.decode_first_stage(samples_ddim)
+                model.decode_first_stage(samples_ddim)
 
     precision_scope = autocast if opt.precision=="autocast" or opt.bf16 else nullcontext
     with torch.no_grad(), \

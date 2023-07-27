@@ -10,9 +10,9 @@
 from dataclasses import dataclass, field
 
 import torch
-from fairseq import metrics, utils
+from fairseq import metrics
 from espnet.nets.pytorch_backend.nets_utils import make_non_pad_mask
-from fairseq.criterions import FairseqCriterion, register_criterion
+from fairseq.criterions import FairseqCriterion
 from fairseq.dataclass import FairseqDataclass
 from speecht5.models.modules.speech_encoder_prenet import SpeechEncoderPrenet
 from espnet.nets.pytorch_backend.e2e_tts_tacotron2 import GuidedAttentionLoss
@@ -226,7 +226,7 @@ class TexttoSpeechLoss(FairseqCriterion):
         )
         encoder_alpha_sum = sum(log.get("encoder_alpha", 0) for log in logging_outputs)
         decoder_alpha_sum = sum(log.get("decoder_alpha", 0) for log in logging_outputs)
-        ngpu = sum(log.get("ngpu", 0) for log in logging_outputs)
+        sum(log.get("ngpu", 0) for log in logging_outputs)
 
         metrics.log_scalar(
             "l1_loss", l1_loss_sum / sample_size, sample_size, 2, round=5

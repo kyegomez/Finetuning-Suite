@@ -4,8 +4,6 @@
 # LICENSE file in the root directory of this source tree.
 
 import logging
-import os
-import sys
 from typing import Dict, List, Optional
 
 import torch

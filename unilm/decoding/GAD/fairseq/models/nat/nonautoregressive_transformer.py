@@ -6,12 +6,10 @@
 import torch
 import torch.nn.functional as F
 from fairseq import utils
-from fairseq.iterative_refinement_generator import DecoderOut
 from fairseq.models import register_model, register_model_architecture
 from fairseq.models.nat import FairseqNATDecoder, FairseqNATEncoder, FairseqNATModel, ensemble_decoder, ensemble_encoder
-from fairseq.models.transformer import Embedding
 from fairseq.modules.transformer_sentence_encoder import init_bert_params
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 from torch import Tensor
 
 def _mean_pooling(enc_feats, src_masks):

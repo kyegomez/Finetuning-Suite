@@ -10,7 +10,6 @@ except ImportError:
 import contextlib
 import itertools
 import logging
-import os
 import warnings
 from typing import Optional, Tuple
 

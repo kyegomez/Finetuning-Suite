@@ -70,7 +70,7 @@ class SwdeDataset(Dataset):
         self.tensors = [all_input_ids, all_attention_mask, all_token_type_ids,
                         all_xpath_tags_seq, all_xpath_subs_seq]
 
-        if not all_labels is None:
+        if all_labels is not None:
             self.tensors.append(all_labels)
 
     def __len__(self):

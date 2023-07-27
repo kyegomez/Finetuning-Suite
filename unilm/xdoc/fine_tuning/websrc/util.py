@@ -4,7 +4,6 @@ import torch
 import os
 import shutil
 # import logging
-import sys
 
 
 # def set_logging(args):

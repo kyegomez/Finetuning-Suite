@@ -10,7 +10,6 @@ import math
 import os
 import pickle
 import random
-from time import sleep
 
 import numpy as np
 import torch

@@ -27,7 +27,6 @@ from datasets import build_beit_pretraining_dataset
 from engine_for_pretraining import train_one_epoch
 from utils import NativeScalerWithGradNormCount as NativeScaler
 import utils
-import modeling_pretrain
 
 
 def get_args():

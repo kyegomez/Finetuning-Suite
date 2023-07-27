@@ -546,7 +546,7 @@ class SpeechLM(nn.Module):
         mask: bool = True,
         output_layer: Optional[int] = None,
     ) -> Dict[str, torch.Tensor]:
-        assert self.add_unit_encoder, f"Can not forward unit-text branch without unit_encoder!"
+        assert self.add_unit_encoder, "Can not forward unit-text branch without unit_encoder!"
 
         padding_mask = src_tokens == self.padding_idx
         unit_embeddings = self.unit_embed_tokens(src_tokens)

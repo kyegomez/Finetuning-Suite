@@ -22,7 +22,6 @@ optimization.
 import torch as th
 import torch.nn.functional as F
 import torch.nn as nn
-import os
 import numpy as np
 import re
 

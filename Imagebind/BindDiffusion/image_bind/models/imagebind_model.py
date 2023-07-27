@@ -7,7 +7,6 @@
 
 
 import os
-import urllib
 from functools import partial
 from types import SimpleNamespace
 

@@ -14,7 +14,6 @@ import tarfile
 import tempfile
 import shutil
 import numpy as np
-from scipy.stats import truncnorm
 
 import torch
 from torch import nn
@@ -1484,7 +1483,6 @@ class BertForSeq2SeqDecoder(PreTrainedBertModel):
         output_shape = list(token_type_ids.size())
         output_length = output_shape[1]
 
-        output_ids = []
         prev_embedding = None
         prev_encoded_layers = None
         curr_ids = input_ids

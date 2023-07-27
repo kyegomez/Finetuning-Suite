@@ -2,7 +2,6 @@ from fairseq.scoring import BaseScorer, register_scorer
 from nltk.metrics.distance import edit_distance
 from fairseq.dataclass import FairseqDataclass
 import fastwer
-from Levenshtein import distance
 import string
 
 @register_scorer("cer", dataclass=FairseqDataclass)

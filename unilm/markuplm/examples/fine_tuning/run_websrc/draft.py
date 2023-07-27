@@ -1,29 +1,10 @@
 from __future__ import absolute_import, division, print_function
 
-import argparse
 import logging
-import os
-import random
-import glob
-import timeit
 
-import numpy as np
-import torch
-from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler)
-from torch.utils.data.distributed import DistributedSampler
-from tensorboardX import SummaryWriter
-from tqdm import tqdm, trange
-from transformers import (
-    WEIGHTS_NAME,
-    AdamW,
-    get_linear_schedule_with_warmup,
-)
 
-from markuplmft.models.markuplm import MarkupLMConfig, MarkupLMTokenizer, MarkupLMTokenizerFast, MarkupLMForQuestionAnswering
+from markuplmft.models.markuplm import MarkupLMConfig, MarkupLMTokenizer, MarkupLMForQuestionAnswering
 
-from utils import StrucDataset
-from utils import (read_squad_examples, convert_examples_to_features, RawResult, write_predictions)
-from utils_evaluate import EvalOpts, main as evaluate_on_squad
 
 logger = logging.getLogger(__name__)
 

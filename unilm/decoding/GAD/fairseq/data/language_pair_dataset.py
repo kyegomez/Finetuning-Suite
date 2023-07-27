@@ -153,7 +153,7 @@ def collate(
         # Collate the packed constraints across the samples, padding to
         # the length of the longest sample.
         lens = [sample.get("constraints").size(0) for sample in samples]
-        max_len = max(lens)
+        max(lens)
         constraints = torch.zeros((len(samples), max(lens))).long()
         for i, sample in enumerate(samples):
             constraints[i, 0 : lens[i]] = samples[i].get("constraints")

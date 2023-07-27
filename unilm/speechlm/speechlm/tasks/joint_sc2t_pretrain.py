@@ -10,7 +10,7 @@
 import logging
 import os
 import sys
-from typing import Dict, List, Optional, Tuple
+from typing import List, Optional, Tuple
 from pathlib import Path
 
 import numpy as np
@@ -32,7 +32,6 @@ from fairseq.data import (
     iterators,
     ResamplingDataset,
     MaskTokensDataset,
-    LanguagePairDataset,
 )
 from fairseq.data.audio.speech_to_text_joint_dataset import S2TJointDataConfig
 from fairseq.data.shorten_dataset import maybe_shorten_dataset
@@ -96,7 +95,7 @@ def get_repeative_start(tokens):
     """
     tokens: torch.Tensor with repeative tokens
     """
-    length = len(tokens)
+    len(tokens)
     rep_start_id = tokens[:-1] != tokens[1:]
     return torch.cat([torch.tensor([True]), rep_start_id])
 
@@ -651,7 +650,7 @@ class Jsc2tPretrainingTask(FairseqTask):
 
         ### 3rd, if provided, create a supervised dataset with labeled data
         if len(split.split('+')) > 3 and split.split('+')[3] != '':
-            assert len(paired_splits) > 0, f"supervised dataset can not be loaded without text paired dataset!"
+            assert len(paired_splits) > 0, "supervised dataset can not be loaded without text paired dataset!"
             tgt = paired_splits[0].rsplit('.', 1)[1].split("-")[1]
             sup_split = split.split('+')[3]
 
@@ -859,7 +858,7 @@ class Jsc2tPretrainingTask(FairseqTask):
         return size_ratio.tolist()
 
     def resample_multi_modality_dataset(self, speech_dataset, sup_dataset, mono_datasets, paired_datasets, mono_splits, paired_splits, epoch=1, train=True):
-        assert len(mono_datasets+paired_datasets) > 0, f"No text data loaded!"
+        assert len(mono_datasets+paired_datasets) > 0, "No text data loaded!"
 
         if len(mono_datasets) > 1 and self.cfg.text_sampling_alpha != 1.0:
             size_ratios = self._get_size_ratios(
@@ -912,7 +911,7 @@ class Jsc2tPretrainingTask(FairseqTask):
             for dataset in dataset_dict.values()
         ])
 
-        if not "speech" in dataset_dict:
+        if "speech" not in dataset_dict:
             distributions = [l / sum(dataset_lens) for l in dataset_lens]
         else:
             ## we just keep the batches of speech and non-speech the same, expand_coef is to ensure speech batches is less than others

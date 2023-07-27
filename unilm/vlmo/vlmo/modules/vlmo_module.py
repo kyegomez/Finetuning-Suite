@@ -1,10 +1,8 @@
-import os
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import pytorch_lightning as pl
 import numpy as np
-import vlmo.modules.multiway_transformer
 
 from transformers.models.bert.modeling_bert import BertConfig, BertEmbeddings
 from vlmo.modules import heads, objectives, vlmo_utils
@@ -426,7 +424,7 @@ class VLMo(pl.LightningModule):
         do_mlm = "_mlm" if mask_text else ""
         text_ids = batch[f"text_ids{do_mlm}"]
         text_labels = batch[f"text_labels{do_mlm}"]
-        text_masks = batch[f"text_masks"]
+        text_masks = batch["text_masks"]
         text_embeds = self.text_embeddings(text_ids)
 
         img = batch[imgkey][0]
@@ -478,7 +476,7 @@ class VLMo(pl.LightningModule):
         do_mlm = "_mlm" if mask_text else ""
         text_ids = batch[f"text_ids{do_mlm}"]
         text_labels = batch[f"text_labels{do_mlm}"]
-        text_masks = batch[f"text_masks"]
+        text_masks = batch["text_masks"]
         text_embeds = self.text_embeddings(text_ids)
         text_embeds = text_embeds + self.token_type_embeddings(torch.zeros_like(text_masks))
 
@@ -534,7 +532,7 @@ class VLMo(pl.LightningModule):
         do_mlm = "_mlm" if mask_text else ""
         text_ids = batch[f"text_ids{do_mlm}"]
         text_labels = batch[f"text_labels{do_mlm}"]
-        text_masks = batch[f"text_masks"]
+        text_masks = batch["text_masks"]
         text_embeds = self.text_embeddings(text_ids)
         text_embeds = text_embeds + self.token_type_embeddings(torch.zeros_like(text_masks))
 
@@ -582,7 +580,7 @@ class VLMo(pl.LightningModule):
         do_mlm = "_mlm" if mask_text else ""
         text_ids = batch[f"text_ids{do_mlm}"]
         text_labels = batch[f"text_labels{do_mlm}"]
-        text_masks = batch[f"text_masks"]
+        text_masks = batch["text_masks"]
         text_embeds = self.text_embeddings(text_ids)
         text_embeds = text_embeds + self.token_type_embeddings(torch.zeros_like(text_masks))
 
@@ -789,7 +787,7 @@ class VLMo(pl.LightningModule):
 
     def validation_step(self, batch, batch_idx):
         vlmo_utils.set_task(self)
-        output = self(batch)
+        self(batch)
 
     def validation_epoch_end(self, outs):
         vlmo_utils.epoch_wrapup(self)

@@ -454,7 +454,7 @@ class VQAv2Dataset(BaseDataset):
         all_major_answers = [normalize_word(word) for word in all_major_answers]
         counter = {k: v for k, v in Counter(all_major_answers).items() if v >= 9}
         ans2label = {k: i for i, k in enumerate(counter.keys())}
-        label2ans = list(counter.keys())
+        list(counter.keys())
 
         for split, annots in zip(
             ["train", "val"], [annotations_train2014, annotations_val2014],

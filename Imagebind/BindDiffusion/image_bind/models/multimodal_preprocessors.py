@@ -616,7 +616,6 @@ class IMUPreprocessor(VerboseNNModule):
         init_param_style: str = "openclip",
     ) -> None:
         super().__init__()
-        stem = imu_stem
         self.imu_stem = imu_stem
         self.embed_dim = embed_dim
         self.use_pos_embed = pos_embed_fn is not None

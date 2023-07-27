@@ -1,14 +1,8 @@
-import logging
 
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
 
 from fairseq import checkpoint_utils
-from fairseq import utils
 
 from fairseq.models import (
-  BaseFairseqModel,
   register_model,
   register_model_architecture,
 )

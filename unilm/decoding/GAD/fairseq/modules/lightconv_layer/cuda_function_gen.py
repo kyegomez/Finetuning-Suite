@@ -245,10 +245,6 @@ std::vector<at::Tensor> lightconv_cuda_backward(
             } else
 """
 
-    final_else = """
-    {
-        switch(filterSize) {
-"""
 
     last_return = """
     }

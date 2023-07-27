@@ -26,8 +26,7 @@ import json
 
 import numpy as np
 import torch
-from sklearn.metrics import matthews_corrcoef, f1_score
-from sklearn.metrics import cohen_kappa_score, precision_score, recall_score, precision_recall_fscore_support
+from sklearn.metrics import precision_score, recall_score
 from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler,
                               TensorDataset)
 from torch.utils.data.distributed import DistributedSampler
@@ -656,7 +655,6 @@ def main():
     )
     tokenizer_args = {k: v for k, v in vars(args).items() if v is not None and k in TOKENIZER_ARGS}
     logger.info("Tokenizer arguments: %s", tokenizer_args)
-    tokenizer_name = args.tokenizer_name if args.tokenizer_name else args.model_name_or_path
     tokenizer = tokenizer_class.from_pretrained(
         args.tokenizer_name if args.tokenizer_name else args.model_name_or_path,
         cache_dir=args.cache_dir if args.cache_dir else None,
@@ -718,7 +716,7 @@ def main():
         best_epoch = None
 
         for checkpoint in checkpoints:
-            prefix = checkpoint.split('/')[-1] if checkpoint.find('checkpoint') != -1 else ""
+            checkpoint.split('/')[-1] if checkpoint.find('checkpoint') != -1 else ""
             checkpoint_config = config_class.from_pretrained(checkpoint)
             model = model_class.from_pretrained(checkpoint, config=checkpoint_config)
             model.to(args.device)

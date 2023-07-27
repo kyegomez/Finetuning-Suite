@@ -7,10 +7,3 @@
 # LICENSE file in the root directory of this source tree.
 # --------------------------------------------------------------------------------
 
-from .config import add_vit_config
-from .backbone import build_vit_fpn_backbone
-from .dataset_mapper import DetrDatasetMapper
-from .mycheckpointer import MyDetectionCheckpointer
-from .icdar_evaluation import ICDAREvaluator
-from .mytrainer import MyTrainer
-from .table_evaluation import calc_table_score

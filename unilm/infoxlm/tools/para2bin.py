@@ -2,8 +2,7 @@ import argparse
 import os
 
 import torch
-from fairseq.data import (FairseqDataset, PrependTokenDataset,
-                          TokenBlockDataset, TruncateDataset, data_utils, StripTokenDataset, ConcatDataset)
+from fairseq.data import (FairseqDataset, TruncateDataset, StripTokenDataset, ConcatDataset)
 from fairseq.data.indexed_dataset import make_builder
 from tqdm import tqdm
 from transformers import AutoTokenizer

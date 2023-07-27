@@ -86,10 +86,10 @@ def read_examples_from_file(file_path, lang, lang2id=None):
                     langs = []
                     subword_len_counter = 0
                 else:
-                    print(f'guid_index', guid_index, words, langs, labels, subword_len_counter)
+                    print('guid_index', guid_index, words, langs, labels, subword_len_counter)
             else:
                 splits = line.split("\t")
-                word = splits[0]
+                splits[0]
 
                 words.append(splits[0])
                 langs.append(lang_id)
@@ -99,7 +99,7 @@ def read_examples_from_file(file_path, lang, lang2id=None):
                     # Examples could have no label for mode = "test"
                     labels.append("O")
         if words:
-            examples.append(InputExample(guid="%s-%d".format(lang, guid_index),
+            examples.append(InputExample(guid="%s-%d".format(),
                                          words=words,
                                          labels=labels,
                                          langs=langs))

@@ -4,8 +4,6 @@
 # LICENSE file in the root directory of this source tree.
 
 import torch
-from fairseq import utils
-from fairseq.iterative_refinement_generator import DecoderOut
 from fairseq.models import register_model, register_model_architecture
 from fairseq.models.nat import FairseqNATModel
 from fairseq.modules.transformer_sentence_encoder import init_bert_params

@@ -164,7 +164,7 @@ class Layoutlmv1Embeddings(nn.Module):
         position_embeddings = self.position_embeddings(position_ids)
         token_type_embeddings = self.token_type_embeddings(token_type_ids)
 
-        if embedding_mode != None and embedding_mode == 'box' : # doc entry
+        if embedding_mode is not None and embedding_mode == 'box' : # doc entry
            
             bbox = torch.clamp(bbox, 0, self.config.max_2d_position_embeddings-1)
             
@@ -182,7 +182,7 @@ class Layoutlmv1Embeddings(nn.Module):
                 # + w_position_embeddings
                 + token_type_embeddings
             )
-        elif embedding_mode != None and embedding_mode == 'html+box' : # doc entry
+        elif embedding_mode is not None and embedding_mode == 'html+box' : # doc entry
           
             bbox = torch.clamp(bbox, 0, self.config.max_2d_position_embeddings-1)
             

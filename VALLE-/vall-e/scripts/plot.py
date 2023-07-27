@@ -23,7 +23,7 @@ def plot(paths, args):
         for row in re.findall(pattern, text, re.DOTALL):
             try:
                 row = json.loads(row)
-            except Exception as e:
+            except Exception:
                 continue
 
             if "global_step" in row:

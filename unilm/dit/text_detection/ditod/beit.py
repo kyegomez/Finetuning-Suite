@@ -20,7 +20,6 @@ for some einops/einsum fun
 
 Hacked together by / Copyright 2020 Ross Wightman
 """
-import warnings
 import math
 import torch
 from functools import partial

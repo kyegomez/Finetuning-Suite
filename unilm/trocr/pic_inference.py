@@ -1,6 +1,4 @@
 import task
-import deit
-import trocr_models
 import torch
 import fairseq
 from fairseq import utils

@@ -13,7 +13,6 @@ import torch.nn.functional as F
 
 
 def append_prefix(k):
-    prefix = 'backbone.bottom_up.backbone.'
     # return prefix + k if not k.startswith(prefix) else k
     return k
 

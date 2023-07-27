@@ -8,7 +8,6 @@
 # ----------------------------------------------------------------------------
 
 import torch
-import numpy as np
 import logging
 from pathlib import Path
 from argparse import Namespace

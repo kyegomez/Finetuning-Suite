@@ -6,8 +6,7 @@ import torch
 
 from transformers.data.processors.utils import (DataProcessor,
   InputExample, InputFeatures)
-from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler,
-                              TensorDataset)
+from torch.utils.data import (TensorDataset)
 
 logger = logging.getLogger(__name__)
 

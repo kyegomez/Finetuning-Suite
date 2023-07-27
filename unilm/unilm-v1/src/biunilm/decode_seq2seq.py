@@ -4,24 +4,19 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import os
 import logging
 import glob
 import argparse
 import math
-from tqdm import tqdm, trange
+from tqdm import tqdm
 import numpy as np
 import torch
-from torch.utils.data import DataLoader, RandomSampler
-from torch.utils.data.distributed import DistributedSampler
 import random
 import pickle
 
 from pytorch_pretrained_bert.tokenization import BertTokenizer, WhitespaceTokenizer
 from pytorch_pretrained_bert.modeling import BertForSeq2SeqDecoder
-from pytorch_pretrained_bert.optimization import BertAdam, warmup_linear
 
-from nn.data_parallel import DataParallelImbalance
 import biunilm.seq2seq_loader as seq2seq_loader
 
 
@@ -143,10 +138,9 @@ def main():
     bi_uni_pipeline.append(seq2seq_loader.Preprocess4Seq2seqDecoder(list(tokenizer.vocab.keys()), tokenizer.convert_tokens_to_ids, args.max_seq_length, max_tgt_length=args.max_tgt_length, new_segment_ids=args.new_segment_ids,
                                                                     mode="s2s", num_qkv=args.num_qkv, s2s_special_token=args.s2s_special_token, s2s_add_segment=args.s2s_add_segment, s2s_share_segment=args.s2s_share_segment, pos_shift=args.pos_shift))
 
-    amp_handle = None
     if args.fp16 and args.amp:
         from apex import amp
-        amp_handle = amp.init(enable_caching=True)
+        amp.init(enable_caching=True)
         logger.info("enable fp16 with amp")
 
     # Prepare model

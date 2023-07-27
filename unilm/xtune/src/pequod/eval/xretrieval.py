@@ -1,5 +1,4 @@
 import faiss
-import json
 import logging
 import numpy as np
 import os
@@ -15,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def similarity_search(x, y, dim, normalize=False, dist='L2'):
   top_k = 10
-  num = x.shape[0]
+  x.shape[0]
   if dist == 'cosine':
     idx = faiss.IndexFlatIP(dim)
   else:
@@ -93,15 +92,7 @@ class TatoebaEvaluator(Evaluator):
       langpairs = ["ar-en" ]
     elif args.data_prefix == "tat15plus":
       args.data_prefix = "tatoeba"
-      l15 = set(["ara", "bul", "deu", "ell", "spa", "fra", "hin", "rus", "swh", "tha", "tur", "urd", "vie", "cmn"])
-      ld = {'ara':'ar', 'heb':'he', 'vie':'vi', 'ind':'id',
-        'jav':'jv', 'tgl':'tl', 'eus':'eu', 'mal':'ml',
-        'tel':'te', 'afr':'af', 'nld':'nl', 'deu':'de',
-        'ell':'el', 'ben':'bn', 'hin':'hi', 'mar':'mr', 'urd':'ur',
-        'tam':'ta', 'fra':'fr', 'ita':'it', 'por':'pt', 'spa':'es',
-        'bul':'bg', 'rus':'ru', 'jpn':'ja', 'kat':'ka', 'kor':'ko',
-        'tha':'th', 'swh':'sw', 'cmn':'zh', 'kaz':'kk', 'tur':'tr',
-        'est':'et', 'fin':'fi', 'hun':'hu', 'pes':'fa'}
+      set(["ara", "bul", "deu", "ell", "spa", "fra", "hin", "rus", "swh", "tha", "tur", "urd", "vie", "cmn"])
       langs_str = 'ar he vi id jv tl eu ml ta te af nl de el bn hi mr ur fa fr it pt es bg ru ja ka ko th sw zh kk tr et fi hu'
       #langs_str = 'hi mr ur fa fr it pt es bg ru ja ka ko th sw zh kk tr et fi hu'
       #langs_str = 'ar he'

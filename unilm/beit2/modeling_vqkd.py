@@ -9,12 +9,9 @@
 # --------------------------------------------------------'
 
 import torch
-import numpy as np
-from torch import nn, einsum
-import torch.nn.functional as F
+from torch import nn
 import math
-from collections import OrderedDict
-from functools import partial, reduce
+from functools import partial
 from einops import rearrange
 from timm.models.layers import trunc_normal_
 from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
@@ -23,7 +20,6 @@ from timm.models.registry import register_model
 from modeling_finetune import VisionTransformer
 from norm_ema_quantizer import NormEMAVectorQuantizer
 
-import utils
 from vqkd_teacher import clip, get_dino_vit_base
 
 class VQKD(nn.Module):

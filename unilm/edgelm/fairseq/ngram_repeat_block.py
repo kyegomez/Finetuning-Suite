@@ -6,7 +6,7 @@ import torch
 from torch import nn
 
 import math
-from typing import Dict, List, Optional
+from typing import Dict, List
 import warnings
 
 try:

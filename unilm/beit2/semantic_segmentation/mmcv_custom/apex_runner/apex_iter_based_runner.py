@@ -1,12 +1,9 @@
 # Copyright (c) Open-MMLab. All rights reserved.
 import os.path as osp
-import platform
-import shutil
 
 import torch
 from torch.optim import Optimizer
 
-import mmcv
 from mmcv.runner import RUNNERS, IterBasedRunner
 from .checkpoint import save_checkpoint
 

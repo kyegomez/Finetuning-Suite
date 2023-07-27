@@ -394,7 +394,7 @@ def concat_into_splits(dl_dataset, src, tgt, extracted_folders, to_folder, debug
 def download_multi(dl_folder, extract_folder, urls, num_processes=8, debug=False):
     pool = mp.Pool(processes=num_processes)
     download_f = partial(download_a_url, dl_folder)
-    downloaded_files = pool.imap_unordered(download_f, urls)
+    pool.imap_unordered(download_f, urls)
     pool.close()
     pool.join()
 
@@ -450,7 +450,7 @@ def download_and_extract(
     os.makedirs(lid_filtered, exist_ok=True)
 
     
-    to_be_manually_dowloaded = check_need_manual_downalod(dl_folder, to_manually_download_urls)
+    check_need_manual_downalod(dl_folder, to_manually_download_urls)
 
     completed_urls = download_dataset(
         dl_folder, dl_dataset, completed_urls)
@@ -466,7 +466,7 @@ def download_and_extract(
     if debug:
         print('download files have been extracted to folders: ', extracted_folders)
 
-    converted_files = convert_files_if_needed(extracted_folders, debug=False)
+    convert_files_if_needed(extracted_folders, debug=False)
     for src_tgt in lang_pairs:
         print(f'working on {dl_dataset.name}: {src_tgt}')
         src, tgt = src_tgt.split('-')

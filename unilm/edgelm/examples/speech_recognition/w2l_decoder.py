@@ -18,7 +18,6 @@ from collections import deque, namedtuple
 
 import numpy as np
 import torch
-from examples.speech_recognition.data.replabels import unpack_replabels
 from fairseq import tasks
 from fairseq.utils import apply_to_sample
 from omegaconf import open_dict
@@ -100,7 +99,6 @@ class W2lViterbiDecoder(W2lDecoder):
 
     def decode(self, emissions):
         B, T, N = emissions.size()
-        hypos = []
         if self.asg_transitions is None:
             transitions = torch.FloatTensor(N, N).zero_()
         else:
@@ -161,7 +159,6 @@ class W2lKenLMDecoder(W2lDecoder):
             )
 
             if self.asg_transitions is None:
-                N = 768
                 # self.asg_transitions = torch.FloatTensor(N, N).zero_()
                 self.asg_transitions = []
 

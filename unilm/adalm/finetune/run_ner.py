@@ -696,7 +696,7 @@ def main():
         best_epoch = None
 
         for checkpoint in checkpoints:
-            prefix = checkpoint.split('/')[-1] if checkpoint.find('checkpoint') != -1 else ""
+            checkpoint.split('/')[-1] if checkpoint.find('checkpoint') != -1 else ""
             checkpoint_config = config_class.from_pretrained(checkpoint)
             model = model_class.from_pretrained(checkpoint, config=checkpoint_config)
             model.to(args.device)

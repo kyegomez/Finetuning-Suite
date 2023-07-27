@@ -1,5 +1,4 @@
 
-from PIL import Image
 import PIL.ImageOps, PIL.ImageEnhance
 import numpy as np
 
@@ -63,7 +62,7 @@ class Equalize:
         if np.random.uniform(0,1) > prob:
             return img
 
-        mg = PIL.ImageOps.equalize(img)
+        PIL.ImageOps.equalize(img)
 
         return img
 
@@ -76,7 +75,7 @@ class AutoContrast:
         if np.random.uniform(0,1) > prob:
             return img
 
-        mg = PIL.ImageOps.autocontrast(img)
+        PIL.ImageOps.autocontrast(img)
 
         return img
 

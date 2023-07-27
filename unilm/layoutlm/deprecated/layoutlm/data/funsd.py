@@ -191,7 +191,7 @@ def read_examples_from_file(data_dir, mode):
         if words:
             examples.append(
                 InputExample(
-                    guid="%s-%d".format(mode, guid_index),
+                    guid="%s-%d".format(),
                     words=words,
                     labels=labels,
                     boxes=boxes,

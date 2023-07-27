@@ -641,7 +641,7 @@ def auto_load_model(args, model, model_without_ddp, optimizer, loss_scaler, mode
 
 def create_ds_config(args):
     Path(args.output_dir).mkdir(parents=True, exist_ok=True)
-    with open(os.path.join(args.output_dir, "latest"), mode="w") as f:
+    with open(os.path.join(args.output_dir, "latest"), mode="w"):
         pass
 
     args.deepspeed_config = os.path.join(args.output_dir, "deepspeed_config.json")

@@ -4,7 +4,6 @@ import os
 import torch
 import random
 
-from torch.autograd import Variable
 from torch.utils.data import DataLoader, TensorDataset
 
 try:
@@ -13,7 +12,7 @@ except ImportError:
   pass
 
 from src.pequod.trainer import (Trainer,
-  XClassificationTrainer, XQATrainer, SelfTrainer)
+  XClassificationTrainer, XQATrainer)
 from transformers import AdamW, ConstantLRSchedule, WarmupLinearSchedule
 
 logger = logging.getLogger(__name__)

@@ -1,6 +1,6 @@
 import os
 
-from typing import Optional, Union
+from typing import Optional
 from transformers.trainer import Trainer
 from transformers.modeling_outputs import SequenceClassifierOutput
 

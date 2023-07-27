@@ -19,7 +19,6 @@ from transformers import BertTokenizer, XLMTokenizer, XLMRobertaTokenizer
 import os
 from collections import defaultdict
 import csv
-import random
 import os
 import shutil
 import json
@@ -192,7 +191,7 @@ def udpos_preprocess(args):
     for line in open(file, 'r'):
       items = line.strip().split('\t')
       if len(items) != 10:
-        empty = all(w == '_' for w in sent)
+        all(w == '_' for w in sent)
         num_empty = sum([int(w == '_') for w in sent])
         if num_empty == 0 or num_empty < len(sent) - 1:
           data.append((sent, tag, lines))

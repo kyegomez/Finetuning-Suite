@@ -10,9 +10,6 @@ from collections import OrderedDict
 from fairseq import utils
 from fairseq.data import (
     BacktranslationDataset,
-    IndexedCachedDataset,
-    IndexedDataset,
-    IndexedRawTextDataset,
     LanguagePairDataset,
     NoisingDataset,
     RoundRobinZipDatasets,

@@ -10,7 +10,7 @@
 import math
 import warnings
 import torch
-from torch import Tensor, nn
+from torch import nn
 import torch.nn.functional as F
 
 

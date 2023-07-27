@@ -3,7 +3,6 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-import importlib
 from collections.abc import Collection
 from dataclasses import dataclass, field
 from typing import List
@@ -17,7 +16,7 @@ from omegaconf import II, DictConfig
 try:
     import deepspeed
     has_deepspeed = True
-except ImportError as e:
+except ImportError:
     has_deepspeed = False
 
 

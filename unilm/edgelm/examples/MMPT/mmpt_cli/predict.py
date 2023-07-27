@@ -11,7 +11,7 @@ import omegaconf
 from omegaconf import OmegaConf
 from torch.utils.data import DataLoader
 
-from mmpt.utils import load_config, set_seed
+from mmpt.utils import load_config
 from mmpt.evaluators import Evaluator
 from mmpt.evaluators import predictor as predictor_path
 from mmpt.tasks import Task

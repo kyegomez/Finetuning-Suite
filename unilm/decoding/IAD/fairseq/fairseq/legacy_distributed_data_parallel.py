@@ -20,7 +20,6 @@ from contextlib import contextmanager
 
 import torch
 from torch import nn
-from torch.autograd import Variable
 
 from . import distributed_utils
 

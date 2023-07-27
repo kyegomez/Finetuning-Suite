@@ -2,14 +2,12 @@ import logging, os, sys
 import time
 import torch
 from torch import Tensor
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 import copy
 from tqdm import tqdm
 from omegaconf import open_dict
-import fairseq
 from fairseq.checkpoint_utils import load_model_ensemble_and_task
 from fairseq import utils
-from fairseq.data import data_utils
 import argparse
 
 logging.basicConfig(
@@ -89,7 +87,7 @@ def baseline_generate(data_lines, model, task, device, no_use_logsoft=False, max
     data_size = len(data_lines)
     all_results = []
     start = time.perf_counter()
-    logger.info(f'Baseline generate')
+    logger.info('Baseline generate')
     for start_idx in tqdm(range(0, data_size)):
         bpe_line = data_lines[start_idx]
         src_tokens = src_dict.encode_line(bpe_line, add_if_not_exist=False).long()

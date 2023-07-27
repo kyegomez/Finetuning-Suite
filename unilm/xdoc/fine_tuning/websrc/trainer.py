@@ -1,6 +1,4 @@
-from genericpath import exists
 import os
-import torch.nn as nn
 import torch
 import logging
 from tqdm import tqdm, trange
@@ -15,7 +13,7 @@ import re
 
 
 from torch.utils.tensorboard import SummaryWriter
-from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler)
+from torch.utils.data import (DataLoader, SequentialSampler)
 from transformers import (
     BasicTokenizer,
 )

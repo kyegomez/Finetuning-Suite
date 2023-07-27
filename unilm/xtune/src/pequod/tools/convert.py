@@ -1,15 +1,8 @@
 import logging
 import torch
 
-from transformers.modeling_bert import (BertConfig, BertEncoder,
-                                        BertIntermediate, BertLayer,
-                                        BertModel, BertOutput,
-                                        BertSelfAttention,
-                                        BertSelfOutput)
-from transformers.modeling_roberta import (RobertaEmbeddings,
-                                           RobertaForMaskedLM,
-                                           RobertaForSequenceClassification,
-                                           RobertaModel)
+from transformers.modeling_bert import (BertConfig)
+from transformers.modeling_roberta import (RobertaForMaskedLM)
 
 
 logger = logging.getLogger(__name__)

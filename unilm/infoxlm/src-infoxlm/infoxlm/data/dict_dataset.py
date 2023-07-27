@@ -1,9 +1,5 @@
-import numpy as np
-import os
-import torch
 
-from threading import Thread
-from fairseq.data import data_utils, FairseqDataset, FairseqIterableDataset
+from fairseq.data import FairseqDataset, FairseqIterableDataset
 
 class DictIterDataset(FairseqIterableDataset):
 

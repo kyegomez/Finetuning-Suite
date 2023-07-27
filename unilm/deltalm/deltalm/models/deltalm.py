@@ -4,12 +4,10 @@
 # LICENSE file in the root directory of this source tree.
 
 import os
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 import torch
-import torch.nn as nn
 from torch import Tensor
-from fairseq import checkpoint_utils
 from fairseq.models import register_model, register_model_architecture
 from fairseq.models.transformer import (
     TransformerModel,
@@ -18,19 +16,13 @@ from fairseq.models.transformer import (
 )
 from fairseq.models.transformer.transformer_config import (
     TransformerConfig,
-    DEFAULT_MAX_SOURCE_POSITIONS,
-    DEFAULT_MAX_TARGET_POSITIONS,
-    DEFAULT_MIN_PARAMS_TO_WRAP,
 )
 from fairseq.modules.transformer_layer import (
     TransformerDecoderLayerBase
 )
-from fairseq.modules.multihead_attention import MultiheadAttention
 from fairseq.modules import LayerNorm
 from fairseq.modules.fairseq_dropout import FairseqDropout
-from fairseq.modules.quant_noise import quant_noise
 from fairseq import utils
-from fairseq.file_io import PathManager
 import logging
 logger = logging.getLogger(__name__)
 

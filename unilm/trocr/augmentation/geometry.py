@@ -1,7 +1,7 @@
 
 import cv2
 import numpy as np
-from PIL import Image, ImageOps
+from PIL import Image
 
 '''
     PIL resize (W,H)
@@ -23,7 +23,7 @@ class Shrink:
         dstpt = list()
 
         W_33 = 0.33 * W
-        W_50 = 0.50 * W
+        0.50 * W
         W_66 = 0.66 * W
 
         H_50 = 0.50 * H

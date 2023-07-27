@@ -7,7 +7,7 @@
 import os, sys
 import subprocess
 import re
-from subprocess import check_call, check_output
+from subprocess import check_output
 
 WORKDIR_ROOT = os.environ.get('WORKDIR_ROOT', None)
 

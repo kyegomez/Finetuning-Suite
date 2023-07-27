@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 import logging
 import os
 
-from omegaconf import MISSING, II, OmegaConf
+from omegaconf import MISSING, II
 
 import numpy as np
 from fairseq import utils

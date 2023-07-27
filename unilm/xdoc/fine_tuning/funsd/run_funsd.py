@@ -3,8 +3,6 @@
 import logging
 import os
 import sys
-from dataclasses import dataclass, field
-from typing import Optional
 
 import numpy as np
 from datasets import ClassLabel, load_dataset, load_metric
@@ -16,8 +14,6 @@ from layoutlmft.data.data_args import DataTrainingArguments
 from layoutlmft.models.model_args import ModelArguments
 from layoutlmft.trainers import FunsdTrainer as Trainer
 from transformers import (
-    AutoConfig,
-    AutoModelForTokenClassification,
     AutoTokenizer,
     HfArgumentParser,
     PreTrainedTokenizerFast,
@@ -25,7 +21,6 @@ from transformers import (
     set_seed,
     RobertaConfig
 )
-import torch
 from model import Layoutlmv1ForTokenClassification
 from transformers.trainer_utils import get_last_checkpoint, is_main_process
 from transformers.utils import check_min_version

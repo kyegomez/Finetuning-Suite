@@ -8,7 +8,6 @@ from transformers.file_utils import PaddingStrategy
 
 from config import Arguments
 from .collator_utils import whole_word_mask, torch_mask_tokens, merge_batch_dict
-from logger_config import logger
 
 
 @dataclass

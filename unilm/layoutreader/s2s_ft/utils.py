@@ -366,7 +366,6 @@ def load_and_cache_line_order_examples(
                 layout['tgt_index'] = shuffle_target_index
                 layout['src'] = shuffle_layout
 
-            mask = tokenizer.mask_token_id
             src_ids = [tokenizer.convert_tokens_to_ids([str(tmp_i)])[:1] + src_layout for tmp_i, src_layout in enumerate(layout['src'])]
             tgt_ids = [tokenizer.convert_tokens_to_ids([str(tmp_i)])[:1] + tgt_layout for tmp_i, tgt_layout in enumerate(layout['tgt'])]
             tgt_index = layout['tgt_index']

@@ -3,12 +3,11 @@ import os
 
 import torch
 from fairseq.data import (FairseqDataset, PrependTokenDataset,
-                          TokenBlockDataset, TruncateDataset, data_utils, StripTokenDataset, ConcatDataset, PrependTokenDataset, AppendTokenDataset)
+                          TruncateDataset, StripTokenDataset, PrependTokenDataset, AppendTokenDataset)
 from fairseq.data.indexed_dataset import make_builder
 from tqdm import tqdm
 from transformers import AutoTokenizer
 
-from infoxlm.data.tlm_dataset import TLMDataset
 
 
 class IndexDataset(FairseqDataset):
@@ -87,7 +86,6 @@ def main(args):
   bos = tokenizer.cls_token_id
   max_pos = args.max_pos
 
-  datasets = []
 
   src_dataset = TruncateDataset(
     StripTokenDataset(src_dataset, eos), max_pos - 2,)

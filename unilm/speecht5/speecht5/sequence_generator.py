@@ -334,7 +334,6 @@ class SequenceGenerator(nn.Module):
         cand_offsets = torch.arange(0, cand_size).type_as(tokens).to(src_tokens.device)
 
         reorder_state: Optional[Tensor] = None
-        ctc_state = None
         batch_idxs: Optional[Tensor] = None
 
         original_batch_idxs: Optional[Tensor] = None

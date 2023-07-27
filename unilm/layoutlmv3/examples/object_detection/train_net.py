@@ -10,31 +10,16 @@
 Detection Training Script for MPViT.
 """
 
-import os
-import itertools
 
-import torch
 
-from typing import Any, Dict, List, Set
 
-from detectron2.data import build_detection_train_loader
 from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.config import get_cfg
-from detectron2.engine import DefaultTrainer, default_argument_parser, default_setup, launch
-from detectron2.evaluation import COCOEvaluator
-from detectron2.solver.build import maybe_add_gradient_clipping
+from detectron2.engine import default_argument_parser, default_setup, launch
 
 from ditod import add_vit_config
-from ditod import DetrDatasetMapper
 
 from detectron2.data.datasets import register_coco_instances
-import logging
-from detectron2.utils.logger import setup_logger
-from detectron2.utils import comm
-from detectron2.engine.defaults import create_ddp_model
-import weakref
-from detectron2.engine.train_loop import AMPTrainer, SimpleTrainer
-from ditod import MyDetectionCheckpointer, ICDAREvaluator
 from ditod import MyTrainer
 
 

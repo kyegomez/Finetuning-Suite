@@ -7,7 +7,6 @@ from PIL import Image
 from omegaconf import OmegaConf
 from einops import repeat
 from imwatermark import WatermarkEncoder
-from pathlib import Path
 
 from ldm.models.diffusion.ddim import DDIMSampler
 from ldm.util import instantiate_from_config

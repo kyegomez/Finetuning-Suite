@@ -9,7 +9,6 @@ from concurrent.futures import ThreadPoolExecutor
 import logging
 from omegaconf import MISSING
 import os
-import torch
 from typing import Optional
 import warnings
 
@@ -56,7 +55,6 @@ class KaldiDecoder(object):
     ):
         try:
             from kaldi.asr import FasterRecognizer, LatticeFasterRecognizer
-            from kaldi.base import set_verbose_level
             from kaldi.decoder import (
                 FasterDecoder,
                 FasterDecoderOptions,

@@ -6,7 +6,6 @@
 # This file define the architecture of unet.
 # ------------------------------------------
 
-import torch.nn.functional as F
 from model.text_segmenter.unet_parts import *
 
 

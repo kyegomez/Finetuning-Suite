@@ -1,4 +1,3 @@
-from tempfile import tempdir
 from fairseq.data.encoders.gpt2_bpe import GPT2BPE, GPT2BPEConfig
 from fairseq.data.encoders import register_bpe
 import logging

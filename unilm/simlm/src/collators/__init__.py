@@ -1,3 +1,0 @@
-from .biencoder_collator import BiencoderCollator
-from .cross_encoder_collator import CrossEncoderCollator
-from .rlm_collator import DataCollatorForReplaceLM

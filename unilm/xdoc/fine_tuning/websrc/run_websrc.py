@@ -1,11 +1,7 @@
 import os
 import sys
 sys.path.append(os.getcwd())
-import torch
-import torch.nn as nn
-import shutil
 import logging
-import torch.distributed as dist
 
 
 from transformers import (
@@ -20,7 +16,7 @@ from model import (
     Layoutlmv1Config_roberta,
     Layoutlmv1ForQuestionAnswering_roberta
 )
-from util import set_seed, set_exp_folder, check_screen
+from util import set_seed, set_exp_folder
 from trainer import train, evaluate # choose a specific train function
 # from data.datasets.docvqa import DocvqaDataset
 from websrc import get_websrc_dataset

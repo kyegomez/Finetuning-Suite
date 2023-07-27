@@ -1,5 +1,4 @@
 from collections import defaultdict
-from itertools import islice
 from pathlib import Path
 import argparse
 import sys, copy

@@ -2,19 +2,16 @@ import os
 import torch
 import collections
 import logging
-from tqdm import tqdm, trange
+from tqdm import tqdm
 import json
 import bs4
 from os import path as osp
 from bs4 import BeautifulSoup as bs
 # from transformers.models.bert.tokenization_bert import BasicTokenizer, whitespace_tokenize
 from torch.utils.data import Dataset
-import networkx as nx
 from lxml import etree
 import pickle
 # from transformers.tokenization_bert import BertTokenizer
-from transformers import BertTokenizer
-import argparse
 
 tags_dict = {'a': 0, 'abbr': 1, 'acronym': 2, 'address': 3, 'altGlyph': 4, 'altGlyphDef': 5, 'altGlyphItem': 6,
              'animate': 7, 'animateColor': 8, 'animateMotion': 9, 'animateTransform': 10, 'applet': 11, 'area': 12,
@@ -111,7 +108,7 @@ class StrucDataset(Dataset):
         attention_mask = output[1]
 
 
-        if not self.attention_width is None or self.has_tree_attention_bias:
+        if self.attention_width is not None or self.has_tree_attention_bias:
             assert self.all_graph_names is not None , ("For non-empty attention_width / tree rel pos,"
                                                        "Graph names must be sent in!")
 
@@ -220,7 +217,6 @@ def get_xpath_and_treeid4tokens(html_code, unique_tids, max_depth):
 
     pad_x_tag_seq = [pad_tag_id] * max_depth
     pad_x_subs_seq = [width_pad_id] * max_depth
-    pad_x_box = [0,0,0,0]
     pad_tree_id_seq = [width_pad_id] * max_depth
 
     def xpath_soup(element):
@@ -1051,7 +1047,7 @@ def convert_examples_to_features(examples, tokenizer, max_seq_length, doc_stride
     pad_x_tag_seq = [216] * max_depth
     pad_x_subs_seq = [1001] * max_depth
     pad_x_box = [0,0,0,0]
-    pad_tree_id_seq = [1001] * max_depth
+    [1001] * max_depth
 
     unique_id = 1000000000
     features = []
@@ -1060,7 +1056,6 @@ def convert_examples_to_features(examples, tokenizer, max_seq_length, doc_stride
         xpath_tag_map = example.xpath_tag_map
         xpath_subs_map = example.xpath_subs_map
         xpath_box = example.xpath_box  
-        tree_id_map = example.tree_id_map
         visible_matrix = example.visible_matrix
 
         query_tokens = tokenizer.tokenize(example.question_text)

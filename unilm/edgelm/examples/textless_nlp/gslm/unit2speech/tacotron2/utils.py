@@ -11,7 +11,6 @@ import numpy as np
 import soundfile as sf
 import time
 import torch
-from scipy.io.wavfile import read
 from .text import SOS_TOK, EOS_TOK
 
 

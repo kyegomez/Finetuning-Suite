@@ -12,7 +12,6 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 import re
 import numpy as np
 import torch
-import torch.nn as nn
 from transformers import CLIPTokenizer
 from PIL import Image, ImageDraw, ImageFont
 from util import get_width, get_key_words, adjust_overlap_box, shrink_box, adjust_font_size, alphabet_dic
@@ -170,7 +169,7 @@ def get_layout_from_prompt(args):
             
             
     # print the location of keywords
-    print(f'index\tkeyword\tx_min\ty_min\tx_max\ty_max')
+    print('index\tkeyword\tx_min\ty_min\tx_max\ty_max')
     for index, keyword in enumerate(keywords):
         x_min = int(return_boxes[index][0] * 512)
         y_min = int(return_boxes[index][1] * 512)

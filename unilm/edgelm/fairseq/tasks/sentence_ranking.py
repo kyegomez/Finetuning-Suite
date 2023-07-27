@@ -7,7 +7,6 @@ import logging
 import os
 
 import numpy as np
-from fairseq import utils
 from fairseq.data import (
     ConcatSentencesDataset,
     Dictionary,

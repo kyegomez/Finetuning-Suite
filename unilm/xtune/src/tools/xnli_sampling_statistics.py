@@ -1,6 +1,4 @@
 import argparse
-import json
-import random
 from transformers import XLMRobertaTokenizer
 
 from transformers import xglue_processors as processors

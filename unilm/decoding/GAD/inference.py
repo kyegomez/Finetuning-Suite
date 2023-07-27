@@ -79,7 +79,7 @@ def baseline_generate(data_lines, model, task, batch_size, device, max_len=200):
     data_size = len(data_lines)
     all_results = []
     start = time.perf_counter()
-    logger.info(f'Baseline generate')
+    logger.info('Baseline generate')
     for start_idx in tqdm(range(0, data_size, batch_size)):
         batch_size = min(data_size - start_idx, batch_size)
         batch_lines = [line for line in data_lines[start_idx: start_idx + batch_size]]
@@ -146,7 +146,7 @@ def gad_generate(data_lines, model, AR_model, task, block_size, batch_size, devi
     tgt_dict = task.target_dictionary
     data_size = len(data_lines)
     all_results = []
-    logger.info(f'GAD generate')
+    logger.info('GAD generate')
     start = time.perf_counter()
     for start_idx in tqdm(range(0, data_size, batch_size)):
         batch_size = min(data_size - start_idx, batch_size)

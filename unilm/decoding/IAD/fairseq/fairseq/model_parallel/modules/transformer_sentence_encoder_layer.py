@@ -4,8 +4,6 @@
 # LICENSE file in the root directory of this source tree.
 
 import torch
-import torch.nn.functional as F
-from fairseq import utils
 from fairseq.model_parallel.modules import ModelParallelMultiheadAttention
 from fairseq.modules import TransformerSentenceEncoderLayer
 

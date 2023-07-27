@@ -11,7 +11,6 @@ import argparse
 import random
 import sys
 
-from sacrebleu import extract_ngrams
 
 
 def get_phrase(words, index, length):

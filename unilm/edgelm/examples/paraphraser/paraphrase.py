@@ -4,7 +4,6 @@ import argparse
 import fileinput
 import logging
 import os
-import sys
 
 from fairseq.models.transformer import TransformerModel
 

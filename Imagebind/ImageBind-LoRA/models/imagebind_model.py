@@ -8,7 +8,6 @@ import logging
 import os
 from functools import partial
 from types import SimpleNamespace
-from typing import Dict
 
 import torch
 import torch.nn as nn

@@ -252,7 +252,7 @@ class NoisedDataGenerator(object):
                         for i in range(n_src + n_tgt):
                             if cnt[get_root(i, parent)] == 1:
                                 continue
-                            if not get_root(i, parent) in root2id:
+                            if get_root(i, parent) not in root2id:
                                 root2id[get_root(i, parent)] = len(root2id) + 1
                             align_pooling_id[i] = root2id[get_root(i, parent)]
                         # print(align_pooling_id[:n_src], align_pooling_id[n_src:])
@@ -703,7 +703,7 @@ class NoisedDataGenerator(object):
 
     def load_translate_data_by_batch(self, examples, train_batch_size):
         translate_languagse = self.translate_languages
-        language_cnt = [0] * len(translate_languagse)
+        [0] * len(translate_languagse)
         pass
 
     def get_train_steps(self, examples, args):
@@ -784,7 +784,6 @@ def train(args, train_examples, train_dataset, model, first_stage_model, tokeniz
     logger.info("  Total optimization steps = %d", t_total)
 
     best_score = 0.0
-    best_checkpoint = None
     patience = 0
     global_step = 0
 
@@ -938,7 +937,6 @@ def train(args, train_examples, train_dataset, model, first_stage_model, tokeniz
                             best_score = cur_result["dev_avg"]["f1"]
                             # Save the best model checkpoint
                             output_dir = os.path.join(args.output_dir, "checkpoint-best")
-                            best_checkpoint = output_dir
                             if not os.path.exists(output_dir):
                                 os.makedirs(output_dir)
                             # Take care of distributed/parallel training
@@ -1084,7 +1082,7 @@ def evaluate(args, model, tokenizer, labels, pad_token_label_id, prefix=""):
         model = torch.nn.DataParallel(model)
 
     for split, lang in eval_datasets:
-        task_name = "{0}-{1}".format(split, lang)
+        "{0}-{1}".format(split, lang)
         eval_dataset = load_and_cache_examples(args, tokenizer, labels, pad_token_label_id, mode=split, lang=lang)
         if not os.path.exists(eval_output_dir) and args.local_rank in [-1, 0]:
             os.makedirs(eval_output_dir)

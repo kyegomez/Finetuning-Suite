@@ -85,7 +85,7 @@ def baseline_generate(data_lines, model, task, batch_size, device, no_use_logsof
     data_size = len(data_lines)
     all_results = []
     start = time.perf_counter()
-    logger.info(f'Baseline generate')
+    logger.info('Baseline generate')
     for start_idx in tqdm(range(0, data_size, batch_size)):
         batch_size = min(data_size - start_idx, batch_size)
         batch_lines = [line for line in data_lines[start_idx: start_idx + batch_size]]

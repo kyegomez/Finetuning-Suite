@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import inspect
 import os
 import warnings
 from functools import partial
@@ -54,8 +53,6 @@ else:
 
 
 if is_accelerate_available():
-    import accelerate
-    from accelerate.utils import set_module_tensor_to_device
     from accelerate.utils.versions import is_torch_version
 
 if is_safetensors_available():
@@ -413,7 +410,7 @@ class ModelMixin(torch.nn.Module):
 
         """
         cache_dir = kwargs.pop("cache_dir", DIFFUSERS_CACHE)
-        ignore_mismatched_sizes = kwargs.pop("ignore_mismatched_sizes", False)
+        kwargs.pop("ignore_mismatched_sizes", False)
         force_download = kwargs.pop("force_download", False)
         from_flax = kwargs.pop("from_flax", False)
         resume_download = kwargs.pop("resume_download", False)

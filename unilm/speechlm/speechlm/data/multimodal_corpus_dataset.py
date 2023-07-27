@@ -8,10 +8,9 @@
 # ----------------------------------------------------------------------------
 
 import logging
-from os import replace
 import time
 from collections import OrderedDict
-from typing import Any, Dict, List, Optional
+from typing import Dict, List
 
 import numpy as np
 from fairseq.data import data_utils

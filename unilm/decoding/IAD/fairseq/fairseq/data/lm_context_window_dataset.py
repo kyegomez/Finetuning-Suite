@@ -5,7 +5,6 @@
 
 import numpy as np
 import torch
-from fairseq.data.monolingual_dataset import MonolingualDataset
 
 from . import FairseqDataset
 

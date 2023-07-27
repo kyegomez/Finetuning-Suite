@@ -544,13 +544,12 @@ def degradation_bsrgan_variant(image, sf=4, isp_model=None, up=False):
     """
     image = util.uint2single(image)
     isp_prob, jpeg_prob, scale2_prob = 0.25, 0.9, 0.25
-    sf_ori = sf
 
     h1, w1 = image.shape[:2]
     image = image.copy()[:w1 - w1 % sf, :h1 - h1 % sf, ...]  # mod crop
     h, w = image.shape[:2]
 
-    hq = image.copy()
+    image.copy()
 
     if sf == 4 and random.random() < scale2_prob:  # downsample1
         if np.random.rand() < 0.5:

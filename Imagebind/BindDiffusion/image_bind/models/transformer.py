@@ -11,9 +11,6 @@
 # and https://github.com/facebookresearch/vissl/blob/main/vissl/models/trunks/vision_transformer.py
 
 
-import copy
-import fnmatch
-import logging
 from functools import partial
 from typing import Callable, List
 

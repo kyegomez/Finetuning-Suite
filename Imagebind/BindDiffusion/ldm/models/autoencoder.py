@@ -130,7 +130,7 @@ class AutoencoderKL(pl.LightningModule):
     def validation_step(self, batch, batch_idx):
         log_dict = self._validation_step(batch, batch_idx)
         with self.ema_scope():
-            log_dict_ema = self._validation_step(batch, batch_idx, postfix="_ema")
+            self._validation_step(batch, batch_idx, postfix="_ema")
         return log_dict
 
     def _validation_step(self, batch, batch_idx, postfix=""):

@@ -24,7 +24,6 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 # *****************************************************************************
-import copy
 import torch
 from torch.autograd import Variable
 import torch.nn.functional as F

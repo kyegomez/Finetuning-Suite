@@ -116,7 +116,6 @@ class W2lViterbiDecoder(W2lDecoder):
 
     def decode(self, emissions):
         B, T, N = emissions.size()
-        hypos = []
         if self.asg_transitions is None:
             transitions = torch.FloatTensor(N, N).zero_()
         else:
@@ -177,7 +176,6 @@ class W2lKenLMDecoder(W2lDecoder):
             )
 
             if self.asg_transitions is None:
-                N = 768
                 # self.asg_transitions = torch.FloatTensor(N, N).zero_()
                 self.asg_transitions = []
 

@@ -400,7 +400,6 @@ def convert_namespace_to_omegaconf(args: Namespace) -> DictConfig:
 
     # hack to be able to set Namespace in dict config. this should be removed when we update to newer
     # omegaconf version that supports object flags, or when we migrate all existing models
-    from omegaconf import _utils
 
     with omegaconf_no_object_check():
         if cfg.task is None and getattr(args, "task", None):

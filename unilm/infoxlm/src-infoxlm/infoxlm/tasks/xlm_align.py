@@ -1,11 +1,8 @@
 import os
-from functools import lru_cache
 
 import numpy as np
 import torch
 
-from fairseq import utils
-from fairseq.data.data_utils import process_bpe_symbol
 from fairseq.data.dictionary import Dictionary
 from fairseq.tasks import FairseqTask, register_task
 

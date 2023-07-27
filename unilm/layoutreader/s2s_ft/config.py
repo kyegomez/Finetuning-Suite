@@ -2,7 +2,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import logging
 from transformers import BertConfig, RobertaConfig
-from s2s_ft.configuration_unilm import UnilmConfig
 # from s2s_ft.modeling import LayoutlmConfig
 
 logger = logging.getLogger(__name__)

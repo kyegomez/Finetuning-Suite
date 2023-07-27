@@ -1,4 +1,3 @@
-import deltalm
 
 from fairseq_cli.generate import cli_main
 

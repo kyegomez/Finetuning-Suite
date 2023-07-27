@@ -15,7 +15,6 @@ from typing import Optional, Any
 from omegaconf import MISSING
 
 from fairseq.data import AddTargetDataset, Dictionary, FileAudioDataset, encoders
-from fairseq.data.data_utils import post_process
 from fairseq.dataclass import FairseqDataclass
 from fairseq.dataclass.configs import GenerationConfig
 

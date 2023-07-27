@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import math
-from collections import namedtuple
 import numpy as np
 from shapely.geometry import Polygon
 
@@ -196,9 +194,9 @@ class DetectionDetEvalEvaluator(object):
                             if is_single_overlap(gtNum, detNum) is True :
                                 rG = gtRects[gtNum]
                                 rD = detRects[detNum]
-                                normDist = center_distance(rG, rD);
-                                normDist /= diag(rG) + diag(rD);
-                                normDist *= 2.0;
+                                normDist = center_distance(rG, rD)
+                                normDist /= diag(rG) + diag(rD)
+                                normDist *= 2.0
                                 if normDist < self.ev_param_ind_center_diff_thr:
                                     gtRectMat[gtNum] = 1
                                     detRectMat[detNum] = 1

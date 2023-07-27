@@ -3,7 +3,7 @@ import logging
 import torch
 from torch import nn
 from torch.nn import CrossEntropyLoss
-from transformers import BertConfig, BertModel, BertPreTrainedModel, RobertaConfig
+from transformers import BertModel, BertPreTrainedModel, RobertaConfig
 # from transformers.modeling_bert import BertLayerNorm, BertOnlyMLMHead
 
 logger = logging.getLogger(__name__)

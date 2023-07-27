@@ -13,13 +13,10 @@ from functools import partial
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-from functools import partial, reduce
-from collections import OrderedDict
+from functools import partial
 
-from timm.models.layers import drop_path, to_2tuple, trunc_normal_
+from timm.models.layers import drop_path, trunc_normal_
 
-import pdb 
 
 # https://dl.fbaipublicfiles.com/dino/dino_vitbase16_pretrain/dino_vitbase16_pretrain.pth
     

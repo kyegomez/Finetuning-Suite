@@ -7,7 +7,6 @@ import math
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from examples.simultaneous_translation.utils.functions import (
     exclusive_cumprod,
     lengths_to_mask,

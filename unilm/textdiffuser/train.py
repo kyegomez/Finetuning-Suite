@@ -17,11 +17,10 @@ from pathlib import Path
 from typing import Optional
 from packaging import version
 from collections import OrderedDict
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 from huggingface_hub import HfFolder, Repository, create_repo, whoami
 
 import datasets
-from datasets import load_dataset
 
 import torch
 import torch.utils.checkpoint
@@ -588,7 +587,6 @@ def main():
     )
         
     from datasets import Dataset
-    from datasets import load_dataset
     lines = open(args.train_dataset_index_file).readlines()
     random.shuffle(lines)
     train_dataset = Dataset.from_dict({"image": lines, "text": lines}) 
@@ -891,7 +889,7 @@ def main():
 
             resume_global_step = global_step * args.gradient_accumulation_steps
             first_epoch = global_step // num_update_steps_per_epoch
-            resume_step = resume_global_step % (num_update_steps_per_epoch * args.gradient_accumulation_steps)
+            resume_global_step % (num_update_steps_per_epoch * args.gradient_accumulation_steps)
 
     # Only show the progress bar once on each machine.
     progress_bar = tqdm(range(global_step, args.max_train_steps), disable=not accelerator.is_local_main_process)

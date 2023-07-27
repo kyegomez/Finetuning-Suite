@@ -6,7 +6,6 @@
 import math
 from dataclasses import dataclass
 
-import torch.nn.functional as F
 from fairseq import metrics, utils
 from fairseq.criterions import register_criterion
 from fairseq.criterions.cross_entropy import CrossEntropyCriterion

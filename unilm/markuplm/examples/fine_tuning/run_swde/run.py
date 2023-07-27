@@ -286,7 +286,6 @@ def evaluate(args, model, test_websites, sub_output_dir, prefix=""):
     Evaluate the model
     """
 
-    all_eval_res = {}
     all_precision = []
     all_recall = []
     all_f1 = []

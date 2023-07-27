@@ -6,11 +6,9 @@
 # LICENSE file in the root directory of this source tree.
 
 
-import os
 from functools import partial
 from types import SimpleNamespace
 
-import torch
 import torch.nn as nn
 
 from imagebind.helpers import (EinOpsRearrange, LearnableLogitScaling, Normalize,

@@ -202,7 +202,7 @@ class Table:
         for cell in cells:
             sr = cell.getAttribute("start-row")
             sc = cell.getAttribute("start-col")
-            cell_id = cell.getAttribute("id")
+            cell.getAttribute("id")
             b_points = str(cell.getElementsByTagName("Coords")[0].getAttribute("points"))
             # try:
             #     try:
@@ -248,7 +248,7 @@ class Table:
             return self.adj_relations
         else:
             # if len(self._cells) == 0:
-            if self.parsed == False:
+            if self.parsed is False:
                 # fix: cases where there's no cell in table?
                 print("table is not parsed for further steps.")
                 self.parse_table()

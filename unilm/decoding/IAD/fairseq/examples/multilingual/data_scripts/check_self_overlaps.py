@@ -7,7 +7,6 @@
 import os
 import glob
 import argparse
-from utils.dedup import deup
 import sys
 
 WORKDIR_ROOT = os.environ.get('WORKDIR_ROOT', None)
@@ -80,7 +79,7 @@ def main():
 
     results = []
     print(f'checking where {args.split} split data are in training')
-    print(f'direction\tcommon_count\tsrc common\ttgt common\tfrom_size\tto_size')
+    print('direction\tcommon_count\tsrc common\ttgt common\tfrom_size\tto_size')
 
     for direction in directions:
         src, tgt = direction.split('-')

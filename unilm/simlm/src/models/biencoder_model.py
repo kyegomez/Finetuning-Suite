@@ -191,13 +191,13 @@ class BiencoderModelForInference(BiencoderModel):
             _qry_model_path = os.path.join(model_name_or_path, 'query_model')
             _psg_model_path = os.path.join(model_name_or_path, 'passage_model')
             if os.path.exists(_qry_model_path):
-                logger.info(f'found separate weight for query/passage encoders')
+                logger.info('found separate weight for query/passage encoders')
                 logger.info(f'loading query model weight from {_qry_model_path}')
                 lm_q = AutoModel.from_pretrained(_qry_model_path, **hf_kwargs)
                 logger.info(f'loading passage model weight from {_psg_model_path}')
                 lm_p = AutoModel.from_pretrained(_psg_model_path, **hf_kwargs)
             else:
-                logger.info(f'try loading tied weight')
+                logger.info('try loading tied weight')
                 logger.info(f'loading model weight from {model_name_or_path}')
                 lm_q = AutoModel.from_pretrained(model_name_or_path, **hf_kwargs)
                 lm_p = lm_q

@@ -152,7 +152,7 @@ class DenoisingDataset(FairseqDataset):
         if args.mask_length not in ["subword", "word", "span-poisson"]:
             raise ValueError(f"invalid arg: mask-length={args.mask_length}")
         if args.mask_length == "subword" and args.replace_length not in [0, 1]:
-            raise ValueError(f"if using subwords, use replace-length=1 or 0")
+            raise ValueError("if using subwords, use replace-length=1 or 0")
 
         self.mask_span_distribution = None
         if args.mask_length == "span-poisson":

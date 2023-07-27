@@ -6,8 +6,3 @@
 # Last Modified Date: 08.01.2019
 # Last Modified By  : Zhaoyi Wan <wanzhaoyi@megvii.com>
 
-from .log import Logger
-from .average_meter import AverageMeter
-from .visualizer import Visualize
-from .box2seg import resize_with_coordinates, box2seg
-from .convert import convert

@@ -3,7 +3,6 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-import numpy as np
 import torch.nn.functional as F
 from fairseq.data import BaseWrapperDataset
 from fairseq.data.data_utils import get_buckets, get_bucketed_sizes

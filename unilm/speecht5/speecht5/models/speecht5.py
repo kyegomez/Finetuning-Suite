@@ -979,7 +979,6 @@ class T5TransformerModel(FairseqEncoderDecoderModel):
                 encoder_padding_mask = encoder_input.new_zeros((bsz, tsz)) == 1.0
             if repeat_cls_mask is None:
                 mask_size = (encoder_padding_mask.size(0), 1)
-                mask_type = encoder_padding_mask.dtype
                 repeat_cls_mask = encoder_padding_mask.new_zeros(mask_size) == 1.0
             ret_encoder_padding_mask = torch.cat([repeat_cls_mask, encoder_padding_mask], dim=1)
 
@@ -988,7 +987,6 @@ class T5TransformerModel(FairseqEncoderDecoderModel):
             else:
                 ret_encoder_input = torch.cat([encoder_input, encoder_input[:,-1:,:]], dim=1)
                 mask_size = (encoder_padding_mask.size(0), 1)
-                mask_type = encoder_padding_mask.dtype
                 repeat_cls_mask_ = encoder_padding_mask.new_ones(mask_size) == 1.0
                 encoder_padding_mask_ = torch.cat([encoder_padding_mask, repeat_cls_mask_], dim=1)
                 indices = encoder_padding_mask.eq(False).float().sum(1).type(torch.int64).unsqueeze(1)

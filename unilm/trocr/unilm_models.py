@@ -4,7 +4,7 @@ import torch
 from fairseq.modules.quant_noise import quant_noise
 from fairseq.modules import MultiheadAttention
 from fairseq.modules.transformer_layer import TransformerDecoderLayerBase
-from fairseq.models.transformer import TransformerDecoderBase, TransformerDecoder
+from fairseq.models.transformer import TransformerDecoderBase
 from fairseq.modules.checkpoint_activations import checkpoint_wrapper
 from fairseq.distributed import fsdp_wrap
 from fairseq.models.transformer import TransformerConfig

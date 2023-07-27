@@ -8,7 +8,6 @@ import traceback
 import socket
 from multiprocessing import Process, Pipe
 
-import gevent
 from gevent.pywsgi import WSGIServer
 from geventwebsocket.handler import WebSocketHandler
 from flask import Flask, request, render_template, abort
@@ -30,8 +29,6 @@ def hint_url(url, port):
 
 
 def _set_server(conn, name='webcv2', port=7788):
-    package = None
-    package_alive = False
 
     app = Flask(name)
     app.root_path = BASE_DIR

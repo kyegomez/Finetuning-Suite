@@ -18,7 +18,6 @@
 
 import logging
 import os
-import typing
 
 import torch
 from torch import nn

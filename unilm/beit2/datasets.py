@@ -9,17 +9,15 @@
 # https://github.com/facebookresearch/deit/
 # https://github.com/facebookresearch/dino
 # --------------------------------------------------------'
-import argparse
 import os
 import torch
-import random
 
 from torchvision import datasets, transforms
 
 from timm.data.constants import \
     IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD, IMAGENET_INCEPTION_MEAN, IMAGENET_INCEPTION_STD
 from transforms import RandomResizedCropAndInterpolationWithTwoPic, _pil_interp
-from timm.data import create_transform, ImageDataset 
+from timm.data import create_transform 
 
 from masking_generator import MaskingGenerator
 from dataset_folder import ImageFolder

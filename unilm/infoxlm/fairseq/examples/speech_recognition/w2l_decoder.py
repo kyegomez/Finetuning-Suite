@@ -8,10 +8,8 @@
 """
 Wav2letter decoders.
 """
-import math
 import itertools as it
 import torch
-from fairseq import utils
 from examples.speech_recognition.data.replabels import unpack_replabels
 from wav2letter.common import create_word_dict, load_words
 from wav2letter.criterion import CpuViterbiPath, get_data_ptr_as_bytes
@@ -81,7 +79,6 @@ class W2lViterbiDecoder(W2lDecoder):
 
     def decode(self, emissions):
         B, T, N = emissions.size()
-        hypos = []
         if self.asg_transitions is None:
             transitions = torch.FloatTensor(N, N).zero_()
         else:

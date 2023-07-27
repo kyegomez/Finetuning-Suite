@@ -396,7 +396,7 @@ class VGGTransformerEncoder(FairseqEncoder):
                 msg = (
                     "ERROR in transformer config {}:".format(config)
                     + "input dimension {} ".format(input_dim)
-                    + "not dividable by number of heads".format(num_heads)
+                    + "not dividable by number of heads".format()
                 )
                 raise ValueError(msg)
 
@@ -459,7 +459,7 @@ class VGGTransformerEncoder(FairseqEncoder):
         if len(transformer_sampling) != num_layers:
             raise ValueError(
                 "transformer_sampling {} does not match with the number "
-                + "of layers {}".format(transformer_sampling, num_layers)
+                + "of layers {}".format(transformer_sampling, )
             )
 
         for layer, value in enumerate(transformer_sampling):

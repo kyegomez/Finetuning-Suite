@@ -13,11 +13,8 @@
 # limitations under the License.
 
 import json
-import os, collections
-import pickle
-import logging
+import collections
 
-import numpy as np
 import six
 
 

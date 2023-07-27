@@ -7,10 +7,8 @@
 # Licensed under The MIT License [see LICENSE for details]
 # ----------------------------------------------------------------------------
 
-import os
 import argparse
 from tqdm import tqdm
-import numpy as np
 
 
 lg_label = "__label__{}"

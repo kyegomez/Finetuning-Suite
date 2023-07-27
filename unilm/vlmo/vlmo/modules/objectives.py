@@ -8,11 +8,8 @@ import tqdm
 import functools
 import torch.distributed as dist
 
-from torch.utils.data.distributed import DistributedSampler
-from einops import rearrange
 from pytorch_lightning.utilities.distributed import rank_zero_info
 
-from vlmo.modules.dist_utils import all_gather
 
 
 def compute_mlm(pl_module, batch):
@@ -445,35 +442,35 @@ def compute_nlvr2(pl_module, batch):
         test_batches = [i for i, n in enumerate(batch["table_name"]) if "test" in n]
 
         if dev_batches:
-            dev_loss = getattr(pl_module, f"dev_nlvr2_loss")(
+            dev_loss = getattr(pl_module, "dev_nlvr2_loss")(
                 F.cross_entropy(
                     ret["nlvr2_logits"][dev_batches], ret["nlvr2_labels"][dev_batches]
                 )
             )
-            dev_acc = getattr(pl_module, f"dev_nlvr2_accuracy")(
+            dev_acc = getattr(pl_module, "dev_nlvr2_accuracy")(
                 ret["nlvr2_logits"][dev_batches], ret["nlvr2_labels"][dev_batches]
             )
-            pl_module.log(f"nlvr2/dev/loss", dev_loss)
-            pl_module.log(f"nlvr2/dev/accuracy", dev_acc)
+            pl_module.log("nlvr2/dev/loss", dev_loss)
+            pl_module.log("nlvr2/dev/accuracy", dev_acc)
         if test_batches:
-            test_loss = getattr(pl_module, f"test_nlvr2_loss")(
+            test_loss = getattr(pl_module, "test_nlvr2_loss")(
                 F.cross_entropy(
                     ret["nlvr2_logits"][test_batches], ret["nlvr2_labels"][test_batches]
                 )
             )
-            test_acc = getattr(pl_module, f"test_nlvr2_accuracy")(
+            test_acc = getattr(pl_module, "test_nlvr2_accuracy")(
                 ret["nlvr2_logits"][test_batches], ret["nlvr2_labels"][test_batches]
             )
-            pl_module.log(f"nlvr2/test/loss", test_loss)
-            pl_module.log(f"nlvr2/test/accuracy", test_acc)
+            pl_module.log("nlvr2/test/loss", test_loss)
+            pl_module.log("nlvr2/test/accuracy", test_acc)
 
     return ret
 
 
 @torch.no_grad()
 def compute_irtr_recall(pl_module, split="test"):
-    world_size = dist.get_world_size()
-    rank = dist.get_rank()
+    dist.get_world_size()
+    dist.get_rank()
     
     if split == "val":
         rank_zero_info("Use val set...")
@@ -578,7 +575,7 @@ def compute_irtr_recall(pl_module, split="test"):
 
     scores = img_cls_feats @ txt_cls_feats.t()
 
-    rank_zero_info("scores.size(): {}".format(scores.size(), split))
+    rank_zero_info("scores.size(): {}".format(scores.size(), ))
 
     topk10 = scores.topk(10, dim=1)
     topk5 = scores.topk(5, dim=1)
@@ -718,7 +715,7 @@ def compute_irtr_recall_with_rerank(pl_module, split="test"):
 
     scores = img_cls_feats @ txt_cls_feats.t()
 
-    rank_zero_info("scores.size(): {}".format(scores.size(), split))
+    rank_zero_info("scores.size(): {}".format(scores.size(), ))
 
 
     scores_i2t = torch.full((len(iids), len(tiids)), -100.0).to(pl_module.device)
@@ -816,7 +813,7 @@ def vqa_test_step(pl_module, batch, output):
     vqa_logits = output["vqa_logits"]
     vqa_preds = vqa_logits.argmax(dim=-1)
     vqa_preds = [id2answer[pred.item()] for pred in vqa_preds]
-    questions = batch["text"]
+    batch["text"]
     qids = batch["qid"]
     return {"qids": qids, "preds": vqa_preds}
 
