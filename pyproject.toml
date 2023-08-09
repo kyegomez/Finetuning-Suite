@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "finetuning-suite"
-version = "0.1.0"
+version = "0.1.1"
 description = "A fine-tuning suite based on Transformers and LoRA."
 authors = ["Kye Gomez <kye@apac.ai>"]
 license = "MIT"  
