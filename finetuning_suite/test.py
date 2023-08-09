@@ -1,27 +1,20 @@
-import torch
 import logging
+import torch
 from transformers import (AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig,
                           AutoModelForSeq2SeqLM, Seq2SeqTrainer, Seq2SeqTrainingArguments,
                           DataCollatorForSeq2Seq)
-
 from datasets import load_dataset
 from peft import LoraConfig, get_peft_model, prepare_model_for_int8_training, TaskType
 
-class FineTuner:
-    def __init__(self, 
-            model_id: str, 
-            device: str = None,
-            dataset_name=None, 
-            max_length: int = 20, 
-            quantize: bool = False, 
-            quantization_config: dict = None):
+class PEFTFineTuner:
+    def __init__(self, model_id: str, dataset_name: str = "samsum", device: str = None, max_length: int = 20, quantize: bool = False, quantization_config: dict = None):
         self.logger = logging.getLogger(__name__)
         self.device = device if device else ('cuda' if torch.cuda.is_available() else 'cpu')
         self.model_id = model_id
         self.max_length = max_length
         self.dataset_name = dataset_name
 
-        #load dataset
+        # Load dataset and tokenizer
         self.dataset = load_dataset(dataset_name)
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
 
@@ -37,29 +30,17 @@ class FineTuner:
             bnb_config = BitsAndBytesConfig(**quantization_config)
 
         try:
-            self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
-            self.model = AutoModelForCausalLM.from_pretrained(self.model_id, quantization_config=bnb_config)
+            self.model = AutoModelForSeq2SeqLM.from_pretrained(self.model_id, quantization_config=bnb_config)
             self.model.to(self.device)
         except Exception as e:
-            self.logger.error(f"Failed to load the model or the tokenizer: {e}")
+            self.logger.error(f"Failed to load the model: {e}")
             raise
 
-    def __call__(self, prompt_text: str, max_length: int = None):
-        max_length = max_length if max_length else self.max_length
-        try:
-            inputs = self.tokenizer.encode(prompt_text, return_tensors="pt").to(self.device)
-            with torch.no_grad():
-                outputs = self.model.generate(inputs, max_length=max_length, do_sample=True)
-            return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        except Exception as e:
-            self.logger.error(f"Failed to generate the text: {e}")
-            raise
-
-    def preprocess_datas(self, max_source_length, max_target_length):
+    def preprocess_data(self, max_source_length, max_target_length):
         def preprocess_function(sample, padding="max_length"):
-            inputs = ["summarize" + item for item in sample["dialogue"]]
+            inputs = ["summarize: " + item for item in sample["dialogue"]]
             model_inputs = self.tokenizer(inputs, max_length=max_source_length, padding=padding, truncation=True)
-            labels = self.tokenizer(text_target=sample["sumamry"], max_length=max_target_length, padding=padding, truncation=True)
+            labels = self.tokenizer(text_target=sample["summary"], max_length=max_target_length, padding=padding, truncation=True)
             if padding == "max_length":
                 labels["input_ids"] = [
                     [(l if l != self.tokenizer.pad_token_id else -100) for l in label] for label in labels["input_ids"]
@@ -69,8 +50,9 @@ class FineTuner:
 
         tokenized_dataset = self.dataset.map(preprocess_function, batched=True, remove_columns=["dialogue", "summary", "id"])
         return tokenized_dataset
-    
+
     def train(self, output_dir, num_train_epochs):
+        # Define LoRA Config
         lora_config = LoraConfig(
             r=16,
             lora_alpha=32,
@@ -82,11 +64,10 @@ class FineTuner:
         self.model = prepare_model_for_int8_training(self.model)
         self.model = get_peft_model(self.model, lora_config)
 
-        #data collator
+        # Data Collator
         data_collator = DataCollatorForSeq2Seq(self.tokenizer, model=self.model, label_pad_token_id=-100, pad_to_multiple_of=8)
 
-
-        #training args
+        # Training Args
         training_args = Seq2SeqTrainingArguments(
             output_dir=output_dir,
             auto_find_batch_size=True,
@@ -98,33 +79,16 @@ class FineTuner:
             save_strategy="no",
             report_to="tensorboard"
         )
-        tokenized_dataset = self.preprocess_data(512, 150)
+        tokenized_dataset = self.preprocess_data(512, 150)  # Here, you might want to determine max_source_length and max_target_length dynamically.
         trainer = Seq2SeqTrainer(model=self.model, args=training_args, data_collator=data_collator, train_dataset=tokenized_dataset["train"])
         trainer.train()
-    #lora config
 
-
-    def generate(self, prompt_text: str, max_length: int = None):
+    def generate(self, prompt_text, max_length=None):
         max_length = max_length if max_length else self.max_length
-        try:
-            inputs = self.tokenizer.encode(prompt_text, return_tensors="pt").to(self.device)
-            with torch.no_grad():
-                outputs = self.model.generate(inputs, max_length=max_length, do_sample=True)
-            return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        except Exception as e:
-            self.logger.error(f"Failed to generate the text: {e}")
-            raise
+        inputs = self.tokenizer.encode(prompt_text, return_tensors="pt").to(self.device)
+        with torch.no_grad():
+            outputs = self.model.generate(inputs, max_length=max_length, do_sample=True)
+        return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Usage example:
+# finetuner = PEFTFineTuner(model_id="google
