@@ -1,54 +1,93 @@
-# Agora 
+# 🌟 FineTuning Suite 🌟
 
-Agora is an open source research organization devoted to advancing Humanity! Join us and contribute to this project or any of our other 30+ revolutinary projects
+Welcome to the `FineTuning Suite`! Harness the magic of state-of-the-art fine-tuning, with out-of-the-box quantization, LoRA configuration, and more! 🚀
 
-[Join our discord to contribute on this project or receieve support](https://discord.gg/qUtxnK2NMf)
+## 📦 Installation 📦
 
-![Agora banner](agora-banner.png)
+```bash
+$ pip3 install finetuning-suite
+```
 
-# Finetuning-Suite
-Finetuning-Suite is a comprehensive open-source toolkit designed to fine-tune multi-modality AI models, enabling seamless integration of text, images, audio, and video data. This toolkit provides an easy-to-use interface and a collection of powerful tools to help you unlock the full potential of multi-modal AI models in various applications.
+## 🚀 Quick Start 🚀
 
-## Features
+```python
+from finetuning_suite import FineTuner
 
-* SOTA Techniques like quantization + mixed precision inference + qlora
+# Initialize the fine tuner
+model_id="google/flan-t5-xxl"
+dataset_name = "samsung"
 
-* Automated dataset pre-processing
+tuner = FineTuner(
+    model_id=model_id,
+    dataset_name=dataset_name,
+    max_length=150,
+    lora_r=16,
+    lora_alpha=32,
+    quantize=True
+)
 
-* Support for popular multi-modal AI models
+# Generate content
+prompt_text = "Summarize this idea for me."
+print(tuner(prompt_text))
+```
 
-* Customizable fine-tuning options
+## 🎉 Features 🎉
 
-* Evaluation metrics and visualization tools
+- **World-Class Quantization**: Get the most out of your models with top-tier performance and preserved accuracy! 🏋️‍♂️
+  
+- **Automated PEFT**: Simplify your workflow! Let our toolkit handle the optimizations. 🛠️
 
-* Any features you want? Let's make it together
+- **LoRA Configuration**: Dive into the potential of flexible LoRA configurations, a game-changer for performance! 🌌
 
-
-# Get Started
-
-## Method1
-
-Get started:
-
-```git clone https://github.com/kyegomez/Finetuning-Suite.git```
-
-Enter repository
-```cd Finetuning-Suite```
-
-Download the requirements:
-```python3 -m pip install requirements.txt```
-
-Enter your own model in `finetune.py` 
-
-Run ` accelerator config` then run ```accelerator launch finetune.py```
+- **Seamless Integration**: Designed to work seamlessly with popular models like LLAMA, Falcon, and more! 🤖
 
 
-#### Run inference
-Enter in your own model in `inference.py` `model_id="your model"`
 
-Enter your own input question `text="task"`
 
-Run `inference.py`
+
+
+
+## 🛣️ Roadmap 🛣️
+
+Here's a sneak peek into our ambitious roadmap! We're always evolving, and your feedback and contributions can shape our journey! ✨
+
+- [ ] **More Example Scripts**:
+  - [ ] Using GPT models
+  - [ ] Transfer learning examples
+  - [ ] Real-world application samples
+
+- [ ] **Polymorphic Preprocessing Function**:
+  - [ ] Design a function to handle diverse datasets
+  - [ ] Integrate with known dataset structures from popular sources
+  - [ ] Custom dataset blueprint for user-defined structures
+
+- [ ] **Extended Model Support**:
+  - [ ] Integration with RoBERTa, DistilBERT, etc.
+  - [ ] Support for non-English models
+
+- [ ] **Comprehensive Documentation**:
+  - [ ] Detailed usage guide
+  - [ ] Best practices for fine-tuning
+  - [ ] Benchmarks for quantization and LoRA features
+  
+- [ ] **Interactive Web Interface**:
+  - [ ] GUI for easy fine-tuning
+  - [ ] Visualization tools for model insights
+
+- [ ] **Advanced Features**:
+  - [ ] Integration with other quantization techniques
+  - [ ] Support for more task types beyond text generation
+  - [ ] Model debugging and introspection tools
+
+... And so much more coming up!
+
+## 💌 Feedback & Contributions 💌
+
+We're excited about the journey ahead and would love to have you with us! For feedback, suggestions, or contributions, feel free to open an issue or a pull request. Let's shape the future of fine-tuning together! 🌱
+
+## 📜 License 📜
+
+MIT
 
 
 # Share the Love! 💙
@@ -70,3 +109,5 @@ Click the buttons below to share Finetuning-Suite on your favorite social media 
 Also, we'd love to see how you're using Finetuning-Suite! Share your projects and experiences with us by tagging us on Twitter [@finetuning-suite](https://twitter.com/kyegomezb).
 
 Lastly, don't forget to ⭐️ the repository if you find it useful. Your support means a lot to us! Thank you! 💙
+
+
