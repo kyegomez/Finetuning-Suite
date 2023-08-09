@@ -1,18 +1,29 @@
-import torch
 import logging
-from transformers import (AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig,
-                          AutoModelForSeq2SeqLM, Seq2SeqTrainer, Seq2SeqTrainingArguments,
-                          DataCollatorForSeq2Seq)
 
+import torch
 from datasets import load_dataset
-from peft import LoraConfig, get_peft_model, prepare_model_for_int8_training, TaskType
+from peft import LoraConfig, TaskType, get_peft_model, prepare_model_for_int8_training
+from transformers import (
+    AutoModelForCausalLM,
+    AutoTokenizer,
+    BitsAndBytesConfig,
+    DataCollatorForSeq2Seq,
+    Seq2SeqTrainer,
+    Seq2SeqTrainingArguments,
+)
+
 
 class FineTuner:
     def __init__(self, 
             model_id: str, 
             device: str = None,
             dataset_name=None, 
-            max_length: int = 20, 
+            lora_r=16,
+            lora_alpha=32,
+            lora_target_modules=["q", "v"],
+            lora_bias="none",
+            lora_task_type=TaskType.SEQ_2_SEQ_LM,
+            max_length=1000, 
             quantize: bool = False, 
             quantization_config: dict = None):
         self.logger = logging.getLogger(__name__)
@@ -20,6 +31,14 @@ class FineTuner:
         self.model_id = model_id
         self.max_length = max_length
         self.dataset_name = dataset_name
+
+        #lora
+        self.lora_r = lora_r
+        self.lora_alpha = lora_alpha
+        self.lora_target_modules = lora_target_modules
+        self.lora_bias = lora_bias
+        self.lora_task_type = lora_task_type
+
 
         #load dataset
         self.dataset = load_dataset(dataset_name)
@@ -72,12 +91,12 @@ class FineTuner:
     
     def train(self, output_dir, num_train_epochs):
         lora_config = LoraConfig(
-            r=16,
-            lora_alpha=32,
-            target_modules=["q", "v"],
-            lora_dropout=0.05,
-            bias="none",
-            task_type=TaskType.SEQ_2_SEQ_LM
+            r=self.lora_r,
+            lora_alpha=self.lora_alpha,
+            target_modules=self.lora_target_modules,
+            lora_dropout=self.lora_dropout,
+            bias=self.lora_bias,
+            task_type=self.lora_task_type,
         )
         self.model = prepare_model_for_int8_training(self.model)
         self.model = get_peft_model(self.model, lora_config)
