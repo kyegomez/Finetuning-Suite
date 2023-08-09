@@ -1,4 +1,4 @@
-[Finetuning suite logo](ft-logo.png)
+![Finetuning suite logo](ft-logo.png)
 
 Welcome to the `FineTuning Suite`! Harness the magic of state-of-the-art fine-tuning, with out-of-the-box quantization, LoRA configuration, and more! 🚀
 
