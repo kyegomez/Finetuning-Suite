@@ -1,7 +1,6 @@
 ![Finetuning suite logo](ft-logo.png)
 
-Welcome to the `FineTuning Suite`! Harness the magic of state-of-the-art fine-tuning, with out-of-the-box quantization, LoRA configuration, and more! 🚀
-
+Finetune any model with unparalled performance, speed, and reliability using Qlora, BNB, Lora, Peft in less than 30 seconds, just press GO.
 ## 📦 Installation 📦
 
 ```bash
