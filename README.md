@@ -61,7 +61,7 @@ Here's a sneak peek into our ambitious roadmap! We're always evolving, and your 
   - [ ] Custom dataset blueprint for user-defined structures
 
 - [ ] **Extended Model Support**:
-  - [ ] Integration with RoBERTa, DistilBERT, etc.
+  - [ ] Integration with Lama, Falcon, etc.
   - [ ] Support for non-English models
 
 - [ ] **Comprehensive Documentation**:
@@ -77,6 +77,7 @@ Here's a sneak peek into our ambitious roadmap! We're always evolving, and your 
   - [ ] Integration with other quantization techniques
   - [ ] Support for more task types beyond text generation
   - [ ] Model debugging and introspection tools
+  - [ ] Integrate TRLX from Carper
 
 ... And so much more coming up!
 
