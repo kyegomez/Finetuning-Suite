@@ -1,3 +1,5 @@
+[Join Agora](https://discord.gg/qUtxnK2NMf) the community of AI engineers changing the world with their creations.
+
 ![Finetuning suite logo](ft-logo.png)
 
 Finetune any model with unparalled performance, speed, and reliability using Qlora, BNB, Lora, Peft in less than 30 seconds, just press GO.
@@ -109,5 +111,6 @@ Click the buttons below to share Finetuning-Suite on your favorite social media 
 Also, we'd love to see how you're using Finetuning-Suite! Share your projects and experiences with us by tagging us on Twitter [@finetuning-suite](https://twitter.com/kyegomezb).
 
 Lastly, don't forget to ⭐️ the repository if you find it useful. Your support means a lot to us! Thank you! 💙
+
 
 
