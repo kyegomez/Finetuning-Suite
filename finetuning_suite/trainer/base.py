@@ -1,19 +1,9 @@
 from abc import ABC, abstractmethod
-import logging
-
-import torch
-from datasets import load_dataset
-from peft import LoraConfig, TaskType, get_peft_model, prepare_model_for_int8_training
+from peft import LoraConfig, TaskType, get_peft_model
 from transformers import (
-    AutoModelForCausalLM,
-    AutoTokenizer,
-    BitsAndBytesConfig,
     DataCollatorForSeq2Seq,
-    Seq2SeqTrainer,
     Seq2SeqTrainingArguments,
 )
-
-from finetuning_suite.base import Preprocessor, DefaultPreprocessor
 
 
 class TrainerConfiguration(ABC):
@@ -40,7 +30,7 @@ class DefaultTrainerConfig(TrainerConfiguration):
         )
         model = get_peft_model(model, lora_config)
         
-        data_collator = DataCollatorForSeq2Seq(tokenizer, model=model,  label_pad_token_id=-100, pad_to_multiple_of=8 ):
+        data_collator = DataCollatorForSeq2Seq(tokenizer, model=model,  label_pad_token_id=-100, pad_to_multiple_of=8 )
 
         training_args = Seq2SeqTrainingArguments(
             output_dir=output_dir,

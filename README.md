@@ -173,3 +173,115 @@ By adhering to the outlined structure and rules, you ensure that custom preproce
 --- 
 
 This documentation provides a concise overview, rules, and guidelines for effectively using and extending the `Preprocessor` abstract class.
+
+---
+
+# Custom Training Logic
+### 1. The `TrainerConfiguration` Abstract Class
+
+Let's remove the specifics of the Lora config and collator, and instead provide one abstract method that allows for configuring the model and trainer.
+
+```python
+from abc import ABC, abstractmethod
+
+class TrainerConfiguration(ABC):
+
+    @abstractmethod
+    def configure(self, model, tokenizer, output_dir, num_train_epochs):
+        """Configures the model, collator, and training arguments.
+        
+        Returns:
+            tuple: (configured_model, data_collator, training_args)
+        """
+        pass
+```
+
+### 2. Default Implementation
+
+A simple default implementation can retain the previous configurations:
+
+```python
+class DefaultTrainerConfig(TrainerConfiguration):
+    
+    def configure(self, model, tokenizer, output_dir, num_train_epochs):
+        # LoraConfig (just as an example)
+        lora_config = LoraConfig(
+            r=16,
+            lora_alpha=32,
+            target_modules=["q", "v"],
+            bias="none",
+            task_type=TaskType.SEQ_2_SEQ_LM,
+        )
+        model = get_peft_model(model, lora_config)
+
+        # DataCollator
+        data_collator = DataCollatorForSeq2Seq(tokenizer, model=model, label_pad_token_id=-100, pad_to_multiple_of=8)
+
+        # Training arguments
+        training_args = Seq2SeqTrainingArguments(
+            output_dir=output_dir,
+            auto_find_batch_size=True,
+            learning_rate=1e-3,
+            num_train_epochs=num_train_epochs,
+            logging_dir=f"{output_dir}/logs",
+            logging_strategy="steps",
+            logging_steps=500,
+            save_strategy="no",
+            report_to="tensorboard"
+        )
+
+        return model, data_collator, training_args
+```
+
+### 3. Integration with `FineTuner`
+
+Incorporate the `TrainerConfiguration` into `FineTuner`:
+
+```python
+class FineTuner:
+    
+    def __init__(self, model_id: str, device: str = None, dataset_name=None, trainer_config=None, ...):
+        ...
+        self.trainer_config = trainer_config if trainer_config else DefaultTrainerConfig()
+
+    ...
+
+    def train(self, output_dir, num_train_epochs):
+        self.model, data_collator, training_args = self.trainer_config.configure(self.model, self.tokenizer, output_dir, num_train_epochs)
+        
+        tokenized_dataset = self.preprocess_data(512, 150)
+        trainer = Seq2SeqTrainer(model=self.model, args=training_args, data_collator=data_collator, train_dataset=tokenized_dataset["train"])
+        trainer.train()
+```
+
+### Documentation:
+
+#### `TrainerConfiguration` Abstract Class
+
+The `TrainerConfiguration` abstract class is designed to offer flexibility to users, enabling them to define custom training configurations and strategies to be used with the `FineTuner` class.
+
+- **configure(model, tokenizer, output_dir, num_train_epochs)**: This method is responsible for configuring the model, data collator, and training arguments.
+
+#### Usage:
+
+1. **Extend TrainerConfiguration**:
+   
+   Create your custom trainer configuration by extending `TrainerConfiguration`:
+
+   ```python
+   class MyTrainerConfig(TrainerConfiguration):
+       def configure(self, model, tokenizer, output_dir, num_train_epochs):
+           ...
+           return model, data_collator, training_args
+   ```
+
+2. **Pass to FineTuner**:
+   
+   Once you've defined your configuration, pass it to the `FineTuner`:
+
+   ```python
+   my_config = MyTrainerConfig()
+   finetuner = FineTuner(model_id='your_model_id', trainer_config=my_config)
+   ```
+
+This setup makes the `FineTuner` extremely flexible, accommodating various training strategies and configurations as required by the user.
