@@ -12,6 +12,7 @@ from transformers import (
 
 from finetuning_suite.base import DefaultPreprocessor
 from finetuning_suite.trainer.base import DefaultTrainerConfig
+from finetuning_suite.inference.base import DefaultInferenceHandler
 
 class FineTuner:
     def __init__(self, 
@@ -27,14 +28,17 @@ class FineTuner:
             max_length=1000, 
             quantize: bool = False, 
             quantization_config: dict = None,
-            trainer_config=None):
+            trainer_config=None,
+            inference_handler=None):
         self.logger = logging.getLogger(__name__)
         self.device = device if device else ('cuda' if torch.cuda.is_available() else 'cpu')
         self.model_id = model_id
         self.max_length = max_length
         self.dataset_name = dataset_name
+
         self.preprocessor = preprocessor if preprocessor else DefaultPreprocessor(self.tokenizer)
         self.trainer_config = trainer_config if trainer_config else DefaultTrainerConfig
+        self.inference_handler = inference_handler if inference_handler else DefaultInferenceHandler()
 
         self.lora_r = lora_r
         self.lora_alpha = lora_alpha
@@ -88,16 +92,12 @@ class FineTuner:
         trainer.train()
 
     def generate(self, prompt_text: str, max_length: int = None):
-        max_length = max_length if max_length else self.max_length
         try:
-            inputs = self.tokenizer.encode(prompt_text, return_tensors="pt").to(self.device)
-            with torch.no_grad():
-                outputs = self.model.generate(inputs, max_length=max_length, do_sample=True)
-            return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        except Exception as e:
-            self.logger.error(f"Failed to generate the text: {e}")
-            raise
-
+            return self.inference_handler.generate(prompt_text, self.model, self.tokenizer, self.device, max_length)
+        except Exception as error:
+            error_msg = f"Failed to generate text for input: {prompt_text} because of Error {error} try modifying the inference function"
+            self.logger.error(error_msg)
+            raise ValueError(error_msg) from error
 
 
 

@@ -115,7 +115,136 @@ Lastly, don't forget to ⭐️ the repository if you find it useful. Your suppor
 
 
 
-# Documentation
+
+
+### Documentation:
+
+#### `TrainerConfiguration` Abstract Class
+
+The `TrainerConfiguration` abstract class is designed to offer flexibility to users, enabling them to define custom training configurations and strategies to be used with the `FineTuner` class.
+
+- **configure(model, tokenizer, output_dir, num_train_epochs)**: This method is responsible for configuring the model, data collator, and training arguments.
+
+#### Usage:
+
+1. **Extend TrainerConfiguration**:
+   
+   Create your custom trainer configuration by extending `TrainerConfiguration`:
+
+   ```python
+   class MyTrainerConfig(TrainerConfiguration):
+       def configure(self, model, tokenizer, output_dir, num_train_epochs):
+           ...
+           return model, data_collator, training_args
+   ```
+
+2. **Pass to FineTuner**:
+   
+   Once you've defined your configuration, pass it to the `FineTuner`:
+
+   ```python
+   my_config = MyTrainerConfig()
+   finetuner = FineTuner(model_id='your_model_id', trainer_config=my_config)
+   ```
+
+This setup makes the `FineTuner` extremely flexible, accommodating various training strategies and configurations as required by the user.
+
+-----
+
+## Documentation
+
+### Overview
+
+Our system is architected to be modular, making it versatile and customizable at various stages of the fine-tuning process. Three primary components encapsulate the critical steps: 
+1. **Preprocessing**: Transform raw input data into a format suitable for training.
+2. **Training Configuration**: Set the training parameters, model adjustments, and collators.
+3. **Inference**: Generate outputs based on user-provided input.
+
+The entire system relies on abstract base classes, allowing developers to create custom implementations for each of the aforementioned steps.
+
+### 1. Preprocessing 
+
+#### Abstract Base Class: `Preprocessor`
+- **Initial Parameters**:
+  - `tokenizer`: The tokenizer associated with the model.
+  
+- **Methods**:
+  - `preprocess_function(sample, padding="max_length")`: Transforms the input data sample to a format suitable for model input.
+
+#### Default Implementation: `DefaultPreprocessor`
+Converts dialogues into summaries, tokenizes them, and manages padding/truncation.
+
+#### Customization
+To create a custom preprocessor, inherit from the `Preprocessor` class and implement the `preprocess_function` method.
+
+### 2. Training Configuration
+
+#### Abstract Base Class: `TrainerConfiguration`
+- **Methods**:
+  - `configure(model, tokenizer, output_dir, num_train_epochs, *args, **kwargs)`: Configures the model, data collator, and training arguments.
+
+#### Default Implementation: `DefaultTrainerConfig`
+Uses LoRA configurations and sets up a `Seq2Seq` collator and training arguments.
+
+#### Customization
+Inherit from `TrainerConfiguration` and implement the `configure` method to customize the training setup.
+
+### 3. Inference 
+
+#### Abstract Base Class: `InferenceHandler`
+- **Methods**:
+  - `generate(prompt_text, model, tokenizer, device, max_length)`: Processes the prompt text and uses the model to generate an output.
+
+#### Default Implementation: `DefaultInferenceHandler`
+Encodes the prompt, generates sequences with the model, and decodes the output.
+
+#### Customization
+Developers can inherit from `InferenceHandler` and implement the `generate` method to customize the inference logic.
+
+---
+
+### Examples
+
+1. **Custom Preprocessor**:
+```python
+class MyPreprocessor(Preprocessor):
+    def preprocess_function(self, sample, padding="max_length"):
+        # Custom preprocessing logic here
+        ...
+        return processed_sample
+```
+
+2. **Custom Trainer Configuration**:
+```python
+class MyTrainerConfig(TrainerConfiguration):
+    def configure(self, model, tokenizer, output_dir, num_train_epochs, *args, **kwargs):
+        # Custom training configuration logic here
+        ...
+        return custom_model, custom_data_collator, custom_training_args
+```
+
+3. **Custom Inference Handler**:
+```python
+class MyInferenceHandler(InferenceHandler):
+    def generate(self, prompt_text, model, tokenizer, device, max_length):
+        # Custom inference logic here
+        ...
+        return custom_output
+```
+
+### Conclusion
+This documentation provides a roadmap for creating custom implementations for preprocessing, training, and inference logic. The modular architecture ensures flexibility and promotes adherence to the open/closed principle, making the system easily extensible without modifying existing code. Ensure your custom classes inherit from the appropriate base class and implement the required methods for seamless integration.
+
+
+
+
+
+
+-------
+
+
+
+# Custom Preprocesing aDocumentation
 
 ### `Preprocessor` Abstract Class Documentation
 
@@ -254,35 +383,3 @@ class FineTuner:
         trainer = Seq2SeqTrainer(model=self.model, args=training_args, data_collator=data_collator, train_dataset=tokenized_dataset["train"])
         trainer.train()
 ```
-
-### Documentation:
-
-#### `TrainerConfiguration` Abstract Class
-
-The `TrainerConfiguration` abstract class is designed to offer flexibility to users, enabling them to define custom training configurations and strategies to be used with the `FineTuner` class.
-
-- **configure(model, tokenizer, output_dir, num_train_epochs)**: This method is responsible for configuring the model, data collator, and training arguments.
-
-#### Usage:
-
-1. **Extend TrainerConfiguration**:
-   
-   Create your custom trainer configuration by extending `TrainerConfiguration`:
-
-   ```python
-   class MyTrainerConfig(TrainerConfiguration):
-       def configure(self, model, tokenizer, output_dir, num_train_epochs):
-           ...
-           return model, data_collator, training_args
-   ```
-
-2. **Pass to FineTuner**:
-   
-   Once you've defined your configuration, pass it to the `FineTuner`:
-
-   ```python
-   my_config = MyTrainerConfig()
-   finetuner = FineTuner(model_id='your_model_id', trainer_config=my_config)
-   ```
-
-This setup makes the `FineTuner` extremely flexible, accommodating various training strategies and configurations as required by the user.

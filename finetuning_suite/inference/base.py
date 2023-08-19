@@ -1,10 +1,16 @@
 from abc import ABC, abstractmethod
 
-class inference(ABC):
-    def __init__(self, model, tokenizer, *args, **kwargs):
-        self.model = model
-        self.tokenizer = tokenizer
-
+class InferenceHandler(ABC):
     @abstractmethod
-    def inference(self):
-        pass 
+    def generate(self, prompt_text=None, model=None, tokenizer=None, device=None, max_length = None):
+        pass
+
+
+class DefaultInferenceHandler(InferenceHandler):
+    def generate(self, prompt_text, model, tokenizer, device, max_length):
+        inputs = tokenizer.encode(prompt_text, return_tensors="pt").to(device)
+        outputs = model.generate(inputs, max_length=max_length, do_sample=True)
+        return tokenizer.decode(outputs[0], skip_special_tokens=True)
+    
+
+
