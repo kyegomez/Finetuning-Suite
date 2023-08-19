@@ -1,4 +1,5 @@
-[Join Agora](https://discord.gg/qUtxnK2NMf) the community of engineers changing the world with their creations.
+[![Multi-Modality](agorabanner.png)](https://discord.gg/qUtxnK2NMf)
+
 
 ![Finetuning suite logo](ft-logo.png)
 
