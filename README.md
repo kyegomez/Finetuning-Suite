@@ -114,3 +114,46 @@ Lastly, don't forget to ⭐️ the repository if you find it useful. Your suppor
 
 
 
+# Documentation
+Certainly! To provide a custom preprocessing function, a user would create a new class that extends the `Preprocessor` abstract class. They then need to override the `preprocess_function` method to implement their own preprocessing logic. 
+
+Here's an example:
+
+### 1. Extend the Preprocessor abstract class
+
+Let's assume a user wants to apply a preprocessing function that only takes the first sentence of each dialogue as the input:
+
+```python
+class FirstSentencePreprocessor(Preprocessor):
+
+    def preprocess_function(self, sample, padding="max_length"):
+        # Just take the first sentence of each dialogue
+        inputs = [item.split('.')[0] for item in sample["dialogue"]]
+        model_inputs = self.tokenizer(inputs, max_length=max_source_length, padding=padding, truncation=True)
+        labels = self.tokenizer(text_target=sample["sumamry"], max_length=max_target_length, padding=padding, truncation=True)
+        
+        if padding == "max_length":
+            labels["input_ids"] = [
+                [(l if l != self.tokenizer.pad_token_id else -100) for l in label] for label in labels["input_ids"]
+            ]
+        
+        model_inputs["labels"] = labels["input_ids"]
+        return model_inputs
+```
+
+### 2. Pass the custom preprocessor to the FineTuner
+
+After defining the custom preprocessor, the user should create an instance of this class and pass it to the `FineTuner` class during initialization.
+
+```python
+# Create a custom preprocessor instance
+custom_preprocessor = FirstSentencePreprocessor(tokenizer=AutoTokenizer.from_pretrained('your_model_id'))
+
+# Initialize FineTuner with the custom preprocessor
+finetuner = FineTuner(model_id='your_model_id', dataset_name='your_dataset', preprocessor=custom_preprocessor)
+
+# Continue with training or other operations...
+finetuner.train(output_dir='your_output_directory', num_train_epochs=5)
+```
+
+By following these steps, users can flexibly introduce their own preprocessing logic into the pipeline without altering the core classes, adhering to a modular and extensible design.
