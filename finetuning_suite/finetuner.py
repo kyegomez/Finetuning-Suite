@@ -2,18 +2,16 @@ import logging
 
 import torch
 from datasets import load_dataset
-from peft import LoraConfig, TaskType, get_peft_model, prepare_model_for_int8_training
+from peft import TaskType
 from transformers import (
     AutoModelForCausalLM,
     AutoTokenizer,
     BitsAndBytesConfig,
-    DataCollatorForSeq2Seq,
     Seq2SeqTrainer,
-    Seq2SeqTrainingArguments,
 )
 
-from finetuning_suite.base import Preprocessor, DefaultPreprocessor
-
+from finetuning_suite.base import DefaultPreprocessor
+from finetuning_suite.trainer.base import DefaultTrainerConfig
 
 class FineTuner:
     def __init__(self, 
@@ -28,13 +26,15 @@ class FineTuner:
             lora_task_type=TaskType.SEQ_2_SEQ_LM,
             max_length=1000, 
             quantize: bool = False, 
-            quantization_config: dict = None):
+            quantization_config: dict = None,
+            trainer_config=None):
         self.logger = logging.getLogger(__name__)
         self.device = device if device else ('cuda' if torch.cuda.is_available() else 'cpu')
         self.model_id = model_id
         self.max_length = max_length
         self.dataset_name = dataset_name
         self.preprocessor = preprocessor if preprocessor else DefaultPreprocessor(self.tokenizer)
+        self.trainer_config = trainer_config if trainer_config else DefaultTrainerConfig
 
         self.lora_r = lora_r
         self.lora_alpha = lora_alpha
@@ -76,39 +76,16 @@ class FineTuner:
             self.logger.error(f"Failed to generate the text: {e}")
             raise
 
-    def preprocess_datas(self, max_source_length, max_target_length):
+    def preprocess_data(self):
         tokenized_dataset = self.dataset.map(self.preprocessor.preprocess_function, batched=True, remove_columns=["dialogue", "summary", "id"])
         return tokenized_dataset
     
     def train(self, output_dir, num_train_epochs):
-        lora_config = LoraConfig(
-            r=self.lora_r,
-            lora_alpha=self.lora_alpha,
-            target_modules=self.lora_target_modules,
-            lora_dropout=self.lora_dropout,
-            bias=self.lora_bias,
-            task_type=self.lora_task_type,
-        )
-        self.model = prepare_model_for_int8_training(self.model)
-        self.model = get_peft_model(self.model, lora_config)
-
-        data_collator = DataCollatorForSeq2Seq(self.tokenizer, model=self.model, label_pad_token_id=-100, pad_to_multiple_of=8)
-
-        training_args = Seq2SeqTrainingArguments(
-            output_dir=output_dir,
-            auto_find_batch_size=True,
-            learning_rate=1e-3,
-            num_train_epochs=num_train_epochs,
-            logging_dir=f"{output_dir}/logs",
-            logging_strategy="steps",
-            logging_steps=500,
-            save_strategy="no",
-            report_to="tensorboard"
-        )
-        tokenized_dataset = self.preprocess_data(512, 150)
+        self.model, data_collator, training_args = self.trainer_config.configure(self.model, self.tokenizer, output_dir, num_train_epochs)
+        
+        tokenized_dataset = self.preprocessor_datas()
         trainer = Seq2SeqTrainer(model=self.model, args=training_args, data_collator=data_collator, train_dataset=tokenized_dataset["train"])
         trainer.train()
-
 
     def generate(self, prompt_text: str, max_length: int = None):
         max_length = max_length if max_length else self.max_length
@@ -120,13 +97,6 @@ class FineTuner:
         except Exception as e:
             self.logger.error(f"Failed to generate the text: {e}")
             raise
-
-
-
-
-
-
-
 
 
 
