@@ -115,45 +115,61 @@ Lastly, don't forget to ⭐️ the repository if you find it useful. Your suppor
 
 
 # Documentation
-Certainly! To provide a custom preprocessing function, a user would create a new class that extends the `Preprocessor` abstract class. They then need to override the `preprocess_function` method to implement their own preprocessing logic. 
 
-Here's an example:
+### `Preprocessor` Abstract Class Documentation
 
-### 1. Extend the Preprocessor abstract class
+#### Overview:
+The `Preprocessor` abstract class serves as a blueprint for custom data preprocessing strategies to be used with the `FineTuner` class. The primary goal is to provide a polymorphic structure that enables users to create their custom preprocessing functions while adhering to the established interface.
 
-Let's assume a user wants to apply a preprocessing function that only takes the first sentence of each dialogue as the input:
+#### Structure:
+- The class contains a single abstract method, `preprocess_function`, that subclasses must implement.
+- An optional tokenizer can be passed during initialization and used within the preprocessing method if needed.
+
+#### Rules for extending:
+1. **Mandatory Implementation**: Any class extending the `Preprocessor` must provide a concrete implementation of the `preprocess_function`.
+2. **Method Signature**: The `preprocess_function` must have the same signature across all implementations: `(sample, padding="max_length")`.
+3. **Return Type**: The `preprocess_function` should return a dictionary compatible with the transformer's model input. Typically, this includes tokenized input sequences and associated labels.
+4. **Use Tokenizer Judiciously**: While the tokenizer is provided and can be used within the preprocess function, it's essential to remember that different tokenizers may have distinct properties and methods. Ensure compatibility.
+5. **Ensure Padding Compatibility**: Since padding is a parameter, make sure to handle different padding strategies like `max_length`, `longest`, etc.
+
+#### Example:
 
 ```python
-class FirstSentencePreprocessor(Preprocessor):
+from abc import ABC, abstractmethod
 
+class Preprocessor(ABC):
+
+    def __init__(self, tokenizer):
+        self.tokenizer = tokenizer
+
+    @abstractmethod
     def preprocess_function(self, sample, padding="max_length"):
-        # Just take the first sentence of each dialogue
-        inputs = [item.split('.')[0] for item in sample["dialogue"]]
-        model_inputs = self.tokenizer(inputs, max_length=max_source_length, padding=padding, truncation=True)
-        labels = self.tokenizer(text_target=sample["sumamry"], max_length=max_target_length, padding=padding, truncation=True)
-        
-        if padding == "max_length":
-            labels["input_ids"] = [
-                [(l if l != self.tokenizer.pad_token_id else -100) for l in label] for label in labels["input_ids"]
-            ]
-        
-        model_inputs["labels"] = labels["input_ids"]
-        return model_inputs
+        pass
 ```
 
-### 2. Pass the custom preprocessor to the FineTuner
+#### Usage:
+To use the `Preprocessor` class, follow the steps below:
 
-After defining the custom preprocessor, the user should create an instance of this class and pass it to the `FineTuner` class during initialization.
+1. **Create a Custom Preprocessor**:
+    Extend the `Preprocessor` abstract class and implement the `preprocess_function` according to your requirements.
 
-```python
-# Create a custom preprocessor instance
-custom_preprocessor = FirstSentencePreprocessor(tokenizer=AutoTokenizer.from_pretrained('your_model_id'))
+   ```python
+   class CustomPreprocessor(Preprocessor):
+       def preprocess_function(self, sample, padding="max_length"):
+           # Your custom preprocessing logic here
+           pass
+   ```
 
-# Initialize FineTuner with the custom preprocessor
-finetuner = FineTuner(model_id='your_model_id', dataset_name='your_dataset', preprocessor=custom_preprocessor)
+2. **Pass to FineTuner**:
+   Instantiate your custom preprocessor and pass it to the `FineTuner` during initialization.
 
-# Continue with training or other operations...
-finetuner.train(output_dir='your_output_directory', num_train_epochs=5)
-```
+   ```python
+   custom_preprocessor = CustomPreprocessor(tokenizer=YourTokenizer)
+   finetuner = FineTuner(model_id='your_model_id', preprocessor=custom_preprocessor)
+   ```
 
-By following these steps, users can flexibly introduce their own preprocessing logic into the pipeline without altering the core classes, adhering to a modular and extensible design.
+By adhering to the outlined structure and rules, you ensure that custom preprocessing functions are easily integrated into the existing pipeline and remain compatible with the overall training and generation processes.
+
+--- 
+
+This documentation provides a concise overview, rules, and guidelines for effectively using and extending the `Preprocessor` abstract class.
