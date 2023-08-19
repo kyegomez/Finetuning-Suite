@@ -12,6 +12,8 @@ from transformers import (
     Seq2SeqTrainingArguments,
 )
 
+from finetuning_suite.base import Preprocessor, DefaultPreprocessor
+
 
 class FineTuner:
     def __init__(self, 
@@ -22,6 +24,7 @@ class FineTuner:
             lora_alpha=32,
             lora_target_modules=["q", "v"],
             lora_bias="none",
+            preprocessor=None,
             lora_task_type=TaskType.SEQ_2_SEQ_LM,
             max_length=1000, 
             quantize: bool = False, 
@@ -31,6 +34,7 @@ class FineTuner:
         self.model_id = model_id
         self.max_length = max_length
         self.dataset_name = dataset_name
+        self.preprocessor = preprocessor if preprocessor else DefaultPreprocessor(self.tokenizer)
 
         #lora
         self.lora_r = lora_r
@@ -75,18 +79,7 @@ class FineTuner:
             raise
 
     def preprocess_datas(self, max_source_length, max_target_length):
-        def preprocess_function(sample, padding="max_length"):
-            inputs = ["summarize" + item for item in sample["dialogue"]]
-            model_inputs = self.tokenizer(inputs, max_length=max_source_length, padding=padding, truncation=True)
-            labels = self.tokenizer(text_target=sample["sumamry"], max_length=max_target_length, padding=padding, truncation=True)
-            if padding == "max_length":
-                labels["input_ids"] = [
-                    [(l if l != self.tokenizer.pad_token_id else -100) for l in label] for label in labels["input_ids"]
-                ]
-            model_inputs["labels"] = labels["input_ids"]
-            return model_inputs
-
-        tokenized_dataset = self.dataset.map(preprocess_function, batched=True, remove_columns=["dialogue", "summary", "id"])
+        tokenized_dataset = self.dataset.map(self.preprocessor.preprocess_function, batched=True, remove_columns=["dialogue", "summary", "id"])
         return tokenized_dataset
     
     def train(self, output_dir, num_train_epochs):
