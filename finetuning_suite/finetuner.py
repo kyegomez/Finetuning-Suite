@@ -36,7 +36,6 @@ class FineTuner:
         self.dataset_name = dataset_name
         self.preprocessor = preprocessor if preprocessor else DefaultPreprocessor(self.tokenizer)
 
-        #lora
         self.lora_r = lora_r
         self.lora_alpha = lora_alpha
         self.lora_target_modules = lora_target_modules
@@ -44,7 +43,6 @@ class FineTuner:
         self.lora_task_type = lora_task_type
 
 
-        #load dataset
         self.dataset = load_dataset(dataset_name)
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
 
@@ -94,11 +92,8 @@ class FineTuner:
         self.model = prepare_model_for_int8_training(self.model)
         self.model = get_peft_model(self.model, lora_config)
 
-        #data collator
         data_collator = DataCollatorForSeq2Seq(self.tokenizer, model=self.model, label_pad_token_id=-100, pad_to_multiple_of=8)
 
-
-        #training args
         training_args = Seq2SeqTrainingArguments(
             output_dir=output_dir,
             auto_find_batch_size=True,
@@ -113,7 +108,6 @@ class FineTuner:
         tokenized_dataset = self.preprocess_data(512, 150)
         trainer = Seq2SeqTrainer(model=self.model, args=training_args, data_collator=data_collator, train_dataset=tokenized_dataset["train"])
         trainer.train()
-    #lora config
 
 
     def generate(self, prompt_text: str, max_length: int = None):
