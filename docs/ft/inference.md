@@ -57,7 +57,7 @@ This method is an alternative to the `__call__` method and performs the same ope
 ### Example 1: Basic Usage
 
 ```python
-from zeta import Inference
+from finetuning_suite import Inference
 
 model_id = "gpt2-small"
 inference = Inference(model_id=model_id)
@@ -70,7 +70,7 @@ print(generated_text)
 ### Example 2: Specifying Maximum Length
 
 ```python
-from zeta import Inference
+from finetuning_suite import Inference
 
 model_id = "gpt2-small"
 inference = Inference(model_id=model_id, max_length=50)
@@ -85,7 +85,7 @@ print(generated_text)
 ```python
 from zeta import Inference
 
-model_id = "gpt2-small"
+from finetuning_suite import Inference
 quantization_config = {
     'load_in_4bit': True,
     'bnb_4bit_use_double_quant': True,

@@ -112,7 +112,7 @@ LoRA is a method for fine-tuning pre-trained models with a small number of addit
 #### Example 1:
 
 ```python
-from zeta import FineTuner
+from finetuning_suite import FineTuner
 import torch
 
 # Initialize the FineTuner
@@ -143,7 +143,7 @@ print(generated_text)
 #### Example 2:
 
 ```python
-from zeta import FineTuner
+from finetuning_suite import FineTuner
 import torch
 
 # Initialize the FineTuner with custom quantization configuration
@@ -172,7 +172,7 @@ print(generated_text)
 #### Example 3:
 
 ```python
-from zeta import FineTuner
+from finetuning_suite import FineTuner
 
 # Initialize the FineTuner with custom trainer configuration
 trainer_config = DefaultTrainerConfig(
