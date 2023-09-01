@@ -95,7 +95,7 @@ nav:
     - ft:
       - ft.FineTuner: 
         - Overview: "ft/finetuner.md"
-      -ft.Inference:
+      - ft.Inference:
         - Overview: "ft/inference.md"
 - Examples:
     - Overview: "examples/index.md"
