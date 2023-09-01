@@ -9,6 +9,7 @@ Finetune any model with unparalled performance, speed, and reliability using Qlo
 # 🤝 Schedule a 1-on-1 Session
 Book a [1-on-1 Session with Kye](https://calendly.com/apacai/agora), the Creator, to discuss any issues, provide feedback, or explore how we can improve Zeta for you.
 
+---
 
 ## 📦 Installation 📦
 
@@ -16,7 +17,10 @@ Book a [1-on-1 Session with Kye](https://calendly.com/apacai/agora), the Creator
 $ pip3 install finetuning-suite
 ```
 
+---
 ## 🚀 Quick Start 🚀
+
+### Finetuning
 
 ```python
 from finetuning_suite import FineTuner
@@ -39,6 +43,22 @@ prompt_text = "Summarize this idea for me."
 print(tuner(prompt_text))
 ```
 
+----
+
+## Inference
+```python
+from finetuning_suite import Inference
+
+model = Inference(
+    model_id="georgesung/llama2_7b_chat_uncensored",
+    quantized=True
+)
+
+model.run("What is your name")
+```
+
+---
+
 ## 🎉 Features 🎉
 
 - **World-Class Quantization**: Get the most out of your models with top-tier performance and preserved accuracy! 🏋️‍♂️
@@ -50,10 +70,7 @@ print(tuner(prompt_text))
 - **Seamless Integration**: Designed to work seamlessly with popular models like LLAMA, Falcon, and more! 🤖
 
 
-
-
-
-
+----
 
 ## 🛣️ Roadmap 🛣️
 
@@ -90,14 +107,19 @@ Here's a sneak peek into our ambitious roadmap! We're always evolving, and your 
 
 ... And so much more coming up!
 
+-----
+
 ## 💌 Feedback & Contributions 💌
 
 We're excited about the journey ahead and would love to have you with us! For feedback, suggestions, or contributions, feel free to open an issue or a pull request. Let's shape the future of fine-tuning together! 🌱
+
+----
 
 ## 📜 License 📜
 
 MIT
 
+---
 
 # Share the Love! 💙
 
@@ -120,7 +142,7 @@ Also, we'd love to see how you're using Finetuning-Suite! Share your projects an
 Lastly, don't forget to ⭐️ the repository if you find it useful. Your support means a lot to us! Thank you! 💙
 
 
-
+----
 
 
 ### Documentation:

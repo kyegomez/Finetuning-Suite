@@ -48,7 +48,7 @@ class Inference:
             raise
 
 
-    def generate(self, prompt_text: str, max_length: int = None):
+    def run(self, prompt_text: str, max_length: int = None):
         max_length = max_length if max_length else self.max_length
         try:
             inputs = self.tokenizer.encode(prompt_text, return_tensors="pt").to(self.device)
