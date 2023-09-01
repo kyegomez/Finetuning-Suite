@@ -81,10 +81,8 @@ nav:
 - ft:
     - Overview: "ft/index.md"
     - ft:
-      - ft.FineTuner: 
-        - Overview: "ft/finetuner.md"
-      - ft.Inference:
-        - Overview: "ft/inference.md"
+      - ft.FineTuner: "ft/finetuner.md"
+      - ft.Inference: "ft/inference.md"
 - Examples:
     - Overview: "examples/index.md"
     - FlashAttention: "examples/nn/attentions/flash.md"
