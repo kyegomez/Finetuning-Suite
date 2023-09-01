@@ -11,6 +11,7 @@ torch = "*"
 transformers = "*" 
 datasets = "*" 
 peft = "*"  
+accelerate = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
