@@ -11,8 +11,9 @@ from transformers import (
 )
 
 from finetuning_suite.base import DefaultPreprocessor
-from finetuning_suite.trainer.base import DefaultTrainerConfig
 from finetuning_suite.inference.base import DefaultInferenceHandler
+from finetuning_suite.trainer.base import DefaultTrainerConfig
+
 
 class FineTuner:
     def __init__(self, 
