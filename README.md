@@ -1,7 +1,7 @@
-[![Multi-Modality](agorabanner.png)](https://discord.gg/qUtxnK2NMf)
+[![Multi-Modality](images/agorabanner.png)](https://discord.gg/qUtxnK2NMf)
 
 
-![Finetuning suite logo](ft-logo.png)
+![Finetuning suite logo](images/ft-logo.png)
 
 Finetune any model with unparalled performance, speed, and reliability using Qlora, BNB, Lora, Peft in less than 30 seconds, just press GO.
 
