@@ -1,25 +1,3 @@
-__pycache__/
-.venv/
-
-.env
-
-image/
-audio/
-video/
-dataframe/
-
-static/generated
-swarms/__pycache__
-venv
-.DS_Store
-
-.DS_STORE
-swarms/agents/.DS_Store
-
-_build
-
-
-.DS_STORE
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -39,6 +17,7 @@ eggs/
 lib/
 lib64/
 parts/
+.ruff_cache/
 sdist/
 var/
 wheels/
@@ -103,7 +82,7 @@ target/
 # IPython
 profile_default/
 ipython_config.py
-.DS_Store
+
 # pyenv
 #   For a library or package, you might want to ignore these files since the code is
 #   intended to run in multiple environments; otherwise, check them in:
