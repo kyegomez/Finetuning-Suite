@@ -27,7 +27,7 @@ Join the Zeta community on Discord to connect with other contributors, coordinat
 
 
 ## Report and Issue
-The easiest way to contribute to our docs is through our public [issue tracker](https://github.com/kyegomez/zeta-docs/issues). Feel free to submit bugs, request features or changes, or contribute to the project directly. 
+The easiest way to contribute to our docs is through our public [issue tracker](https://github.com/kyegomez/finetun/issues). Feel free to submit bugs, request features or changes, or contribute to the project directly. 
 
 ## Pull Requests
 
