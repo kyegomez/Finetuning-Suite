@@ -78,18 +78,6 @@ markdown_extensions:
 nav:
 - Home:
     - Overview: "index.md"
-    - Contributing: "contributing.md"
-    - FAQ: "faq.md"
-    - Purpose: "purpose.md"
-    - Roadmap: "roadmap.md"
-    - Design: "design.md"
-    - Flywheel: "flywheel.md"
-    - Bounties: "bounties.md"
-    - Metric: "metric.md"
-    - Distribution: "distribution"
-    - Research: "research.md"
-    - Demos: "demos.md"
-    - Architecture: "architecture.md"
 - ft:
     - Overview: "ft/index.md"
     - ft:
