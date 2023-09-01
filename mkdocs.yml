@@ -90,12 +90,12 @@ nav:
     - Research: "research.md"
     - Demos: "demos.md"
     - Architecture: "architecture.md"
-- finetuning_suite:
+- ft:
     - Overview: "ft/index.md"
-    - finetuning_suite:
-      - finetuning_suite.FineTuner: 
+    - ft:
+      - ft.FineTuner: 
         - Overview: "ft/finetuner.md"
-      -finetuning_suite.Inference:
+      -ft.Inference:
         - Overview: "ft/inference.md"
 - Examples:
     - Overview: "examples/index.md"
