@@ -16,7 +16,7 @@ types-regex
 mayavi
 cartopy
 safetensors
-lightning==2.0.2
+lightning==2.0.8
 scikit-learn
 
 
