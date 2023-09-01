@@ -33,7 +33,7 @@ The easiest way to contribute to our docs is through our public [issue tracker](
 
 Zeta docs are built using [MkDocs](https://squidfunk.github.io/mkdocs-material/getting-started/). 
 
-To directly contribute to Zeta documentation, first fork the [zeta-docs](https://github.com/kyegomez/zeta-docs) repository to your GitHub account. Then clone your repository to your local machine.
+To directly contribute to Zeta documentation, first fork the [zeta-docs](https://github.com/kyegomez/zeta) repository to your GitHub account. Then clone your repository to your local machine.
 
 From inside the directory run: 
 

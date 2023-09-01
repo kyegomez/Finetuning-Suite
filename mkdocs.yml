@@ -25,7 +25,7 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/kyegomez/finetuning-suite/
     - icon: fontawesome/brands/python
-      link: https://pypi.org/project/ft/
+      link: https://pypi.org/project/finetuning-suite
 theme:
     name: material
     custom_dir: docs/overrides
