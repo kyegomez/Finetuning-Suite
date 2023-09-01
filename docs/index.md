@@ -12,8 +12,3 @@ Finetuning Suite  is a modular framework that enables for seamless, reliable, an
 [Click here for Finetuning Suite Documentation →](ft/)
 
 
-## Examples
-
-Check out Zeta examples for building agents, data retrieval, and more.
-
-[Checkout Zeta examples →](examples/)
