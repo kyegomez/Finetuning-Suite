@@ -28,7 +28,7 @@ class GPTQInference:
             quantization_config=self.quantization_config
         )
 
-    def generate(
+    def run(
             self, 
             prompt: str,
             # max_length: int =x None

@@ -83,6 +83,7 @@ nav:
     - ft:
       - ft.FineTuner: "ft/finetuner.md"
       - ft.Inference: "ft/inference.md"
+      - ft.GPTQInference: "ft/inference/gptq_inference.md"
 - Examples:
     - Overview: "examples/index.md"
     - FlashAttention: "examples/nn/attentions/flash.md"
