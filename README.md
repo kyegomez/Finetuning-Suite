@@ -57,6 +57,23 @@ model = Inference(
 model.run("What is your name")
 ```
 
+
+## GPTQ Inference
+
+```python
+
+from finetuning_suite import GPTQInference
+
+
+model_id = "facebook/opt-125m"
+model = GPTQInference(model_id=model_id, max_length=400)
+
+prompt = "in a land far far away"
+result = model.run(prompt)
+print(result)
+
+```
+
 ---
 
 ## 🎉 Features 🎉

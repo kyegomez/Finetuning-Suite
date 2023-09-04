@@ -31,9 +31,9 @@ class GPTQInference:
     def generate(
             self, 
             prompt: str,
-            max_length: int = None
+            # max_length: int =x None
         ):
-        max_length = max_length if max_length else self.max_length
+        # max_length = max_length if max_length else self.max_length
 
         try:
             inputs = self.tokenizer.encode(
@@ -44,7 +44,7 @@ class GPTQInference:
             with torch.no_grad():
                 outputs = self.model.generate(
                     inputs,
-                    max_length=max_length,
+                    max_length=self.max_length,
                     do_sample=True
                 )
 
