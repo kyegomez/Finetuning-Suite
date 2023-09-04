@@ -12,6 +12,7 @@ transformers = "*"
 datasets = "*" 
 peft = "*"  
 accelerate = "*"
+optimum = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

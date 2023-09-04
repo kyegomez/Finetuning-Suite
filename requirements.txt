@@ -13,8 +13,7 @@ rich
 tensorboard
 wandb
 tokenizers
-
-
+optimum
 
 
 mkdocs
