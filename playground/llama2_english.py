@@ -1,7 +1,7 @@
 from datasets import load_dataset
 from transformers import AutoTokenizer
 
-from finetuning_suite.finetuner import FineTuner
+from fts.finetuner import FineTuner
 
 tokenizer = AutoTokenizer.from_pretrained("Phind/Phind-CodeLlama-34B-v1")
 

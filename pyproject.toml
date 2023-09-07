@@ -1,9 +1,13 @@
 [tool.poetry]
-name = "finetuning-suite"
-version = "0.1.5"
+name = "ft-suite"
+version = "0.1.6"
 description = "A fine-tuning suite based on Transformers and LoRA."
 authors = ["Kye Gomez <kye@apac.ai>"]
 license = "MIT"  
+packages = [
+    { include = "fts" },
+    { include = "fts/**/*.py" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"

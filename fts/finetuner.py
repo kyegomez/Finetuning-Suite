@@ -10,9 +10,9 @@ from transformers import (
     Seq2SeqTrainer,
 )
 
-from finetuning_suite.processing.base import DefaultPreprocessor
-from finetuning_suite.inference.base import DefaultInferenceHandler
-from finetuning_suite.trainer.base import DefaultTrainerConfig
+from fts.processing.base import DefaultPreprocessor
+from fts.inference.base import DefaultInferenceHandler
+from fts.trainer.base import DefaultTrainerConfig
 
 
 class FineTuner:

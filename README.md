@@ -14,7 +14,7 @@ Book a [1-on-1 Session with Kye](https://calendly.com/apacai/agora), the Creator
 ## 📦 Installation 📦
 
 ```bash
-$ pip3 install finetuning-suite
+$ pip3 install ft-suite
 ```
 
 ---
@@ -23,7 +23,7 @@ $ pip3 install finetuning-suite
 ### Finetuning
 
 ```python
-from finetuning_suite import FineTuner
+from fts import FineTuner
 
 # Initialize the fine tuner
 model_id="google/flan-t5-xxl"
@@ -47,7 +47,7 @@ print(tuner(prompt_text))
 
 ## Inference
 ```python
-from finetuning_suite import Inference
+from fts import Inference
 
 model = Inference(
     model_id="georgesung/llama2_7b_chat_uncensored",
@@ -62,7 +62,7 @@ model.run("What is your name")
 
 ```python
 
-from finetuning_suite import GPTQInference
+from fts import GPTQInference
 
 
 model_id = "facebook/opt-125m"

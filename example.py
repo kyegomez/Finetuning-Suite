@@ -1,4 +1,4 @@
-from finetuning_suite import FineTuner
+from fts import FineTuner
 
 model_id="google/flan-t5-xxl"
 
