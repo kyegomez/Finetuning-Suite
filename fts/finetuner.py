@@ -10,8 +10,8 @@ from transformers import (
     Seq2SeqTrainer,
 )
 
-from fts.processing.base import DefaultPreprocessor
 from fts.inference.base import DefaultInferenceHandler
+from fts.processing.base import DefaultPreprocessor
 from fts.trainer.base import DefaultTrainerConfig
 
 

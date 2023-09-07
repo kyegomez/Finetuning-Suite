@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ft-suite"
-version = "0.1.6"
+version = "0.1.7"
 description = "A fine-tuning suite based on Transformers and LoRA."
 authors = ["Kye Gomez <kye@apac.ai>"]
 license = "MIT"  
@@ -17,6 +17,8 @@ datasets = "*"
 peft = "*"  
 accelerate = "*"
 optimum = "*"
+bitsandbytes = "*"
+
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

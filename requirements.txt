@@ -1,12 +1,5 @@
-
-
-
-
-
 transformers
-
 bitsandbytes
-
 accelerate
 datasets
 rich
